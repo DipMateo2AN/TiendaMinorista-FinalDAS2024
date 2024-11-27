@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Modelo
 {
-    public class Proveedor
+    public class Proveedor:Identificación
     {
-        public int Id { get; set; }
-        public string Codigo { get; set; }
-        public string Nombre { get; set; }
-        public string Direccion {  get; set; }
+        public string Direccion { get; set; }
         public string Contacto { get; set; }
 
         public List<Producto> Productos;
