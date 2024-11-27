@@ -17,18 +17,25 @@
 
         public bool AgregarDetalleFactura(DetalleFactura nuevoDetalle)
         {
-            var detalleRepetido = DetallesFactura.FirstOrDefault(d => d.Producto == nuevoDetalle.Producto);
+            var detalleRepetido = DetallesFactura.FirstOrDefault(d => d.Producto.Codigo == nuevoDetalle.Producto.Codigo);
+            if (detalleRepetido == null)
+            {
+                DetallesFactura.Add(nuevoDetalle);
 
-            detalleRepetido.Cantidad += nuevoDetalle.Cantidad;
+            }
+            else detalleRepetido.Cantidad += nuevoDetalle.Cantidad;
             return true;
         }
 
-        public bool EliminarDetalleFactura(DetalleFactura detalleAEliminar)
+        public bool EliminarDetalleFactura(DetalleFactura nuevoDetalle)
         {
-
+            var detalleRepetido = DetallesFactura.FirstOrDefault(d => d.Producto.Codigo == nuevoDetalle.Producto.Codigo);
+            if (detalleRepetido != null)
+            {
+                DetallesFactura.Remove(nuevoDetalle);
+            }
             return false;
         }
-
 
     }
 }
