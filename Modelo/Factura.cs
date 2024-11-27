@@ -15,6 +15,11 @@
             DetallesFactura = new List<DetalleFactura>();
         }
 
+        public List<DetalleFactura> ListarDetallesFacturas()
+        {
+            return DetallesFactura.ToList();
+        }
+
         public bool AgregarDetalleFactura(DetalleFactura nuevoDetalle)
         {
             var detalleRepetido = DetallesFactura.FirstOrDefault(d => d.Producto.Codigo == nuevoDetalle.Producto.Codigo);

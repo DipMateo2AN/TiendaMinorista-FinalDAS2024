@@ -20,6 +20,10 @@ namespace Modelo
         {
             Productos = new List<Producto>();
         }
+        public List<Producto> ListarProductos()
+        {
+            return Productos.ToList();
+        }
 
         public bool AgregarProducto(Producto nuevoProducto)
         {
