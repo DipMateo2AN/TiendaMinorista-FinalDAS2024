@@ -18,16 +18,31 @@ namespace Modelo
 
         //////////////////Metodos////////////////
 
-        public int AjustarStock()
+        public int AjustarStock(int cantidad)
         {
 
-        return Stock; 
-        
+            // Ajusta el stock sumando o restando la cantidad especificada
+            Stock += cantidad;
+
+            // Si el stock es negativo, lo ajustamos definimos en 0
+            if (Stock < 0)
+            {
+                Stock = 0;
+            }
+
+            return Stock;
+
         }
 
-        public decimal AplicarDescuentos()
+        public decimal AplicarDescuentos(decimal porcentajeDescuento)
         {
+            // Calcula el descuento
+            decimal descuento = Precio * (porcentajeDescuento / 100);
 
+            // Aplica el descuento al precio
+            Precio -= descuento;
+
+            // Devuelve el nuevo precio
             return Precio;
         }
 
