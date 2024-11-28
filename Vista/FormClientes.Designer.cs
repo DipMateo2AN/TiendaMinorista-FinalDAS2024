@@ -42,6 +42,10 @@
             label1 = new Label();
             txtCodigo = new TextBox();
             btnSalir = new Button();
+            Codigo = new DataGridViewTextBoxColumn();
+            Nombre = new DataGridViewTextBoxColumn();
+            Direccion = new DataGridViewTextBoxColumn();
+            Contacto = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvDatos).BeginInit();
             gBoxCliente.SuspendLayout();
             SuspendLayout();
@@ -49,10 +53,12 @@
             // dgvDatos
             // 
             dgvDatos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvDatos.Columns.AddRange(new DataGridViewColumn[] { Codigo, Nombre, Direccion, Contacto });
             dgvDatos.Location = new Point(280, 21);
             dgvDatos.Name = "dgvDatos";
             dgvDatos.Size = new Size(454, 218);
             dgvDatos.TabIndex = 3;
+            dgvDatos.CellClick += dgvDatos_CellClick;
             // 
             // gBoxCliente
             // 
@@ -178,6 +184,34 @@
             btnSalir.UseVisualStyleBackColor = true;
             btnSalir.Click += btnSalir_Click;
             // 
+            // Codigo
+            // 
+            Codigo.DataPropertyName = "Codigo";
+            Codigo.HeaderText = "Codigo";
+            Codigo.Name = "Codigo";
+            Codigo.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            Nombre.DataPropertyName = "Nombre";
+            Nombre.HeaderText = "Nombre";
+            Nombre.Name = "Nombre";
+            Nombre.ReadOnly = true;
+            // 
+            // Direccion
+            // 
+            Direccion.DataPropertyName = "Direccion";
+            Direccion.HeaderText = "Direccion";
+            Direccion.Name = "Direccion";
+            Direccion.ReadOnly = true;
+            // 
+            // Contacto
+            // 
+            Contacto.DataPropertyName = "Contacto";
+            Contacto.HeaderText = "Contacto";
+            Contacto.Name = "Contacto";
+            Contacto.ReadOnly = true;
+            // 
             // FormClientes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -210,5 +244,9 @@
         private Label label1;
         private TextBox txtCodigo;
         protected Button btnSalir;
+        private DataGridViewTextBoxColumn Codigo;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewTextBoxColumn Direccion;
+        private DataGridViewTextBoxColumn Contacto;
     }
 }

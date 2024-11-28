@@ -27,11 +27,8 @@ namespace Controladora
             var validarCategoria = context.Categorias.FirstOrDefault(p => p.Codigo == categoriaActualizada.Codigo);
             if (validarCategoria != null)
             {
-                categoriaActualizada.Id = validarCategoria.Id;//Asigno a la Categoria actualizada el mismo Id que la original
-                context.Categorias.Remove(validarCategoria); //Elimino la Categoria original
-                context.Categorias.Add(categoriaActualizada); //Agrego a la Categoria actualizada con el Id de la Categoria original
-                context.SaveChanges();
-                return true;
+               context.Categorias.Update(categoriaActualizada);
+               return context.SaveChanges() > 0;
             }
             return false;
         }

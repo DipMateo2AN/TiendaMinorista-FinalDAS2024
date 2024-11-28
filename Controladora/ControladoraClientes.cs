@@ -28,11 +28,8 @@ namespace Controladora
             var validarCliente = context.Clientes.FirstOrDefault(c => c.Codigo == clienteActualizado.Codigo);
             if (validarCliente != null)
             {
-                clienteActualizado.Id = validarCliente.Id;//Asigno al cliente actualizado el mismo Id que el original
-                context.Clientes.Remove(validarCliente); //Elimino el cliente original
-                context.Clientes.Add(clienteActualizado); //Agrego el cliente actualizado con el Id del cliente original
-                context.SaveChanges();
-                return true;
+                context.Clientes.Update(clienteActualizado);
+                return context.SaveChanges() > 0;
             }
             return false;
         }

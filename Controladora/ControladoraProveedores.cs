@@ -27,11 +27,8 @@ namespace Controladora
             var validarProveedor = context.Proveedores.FirstOrDefault(p => p.Codigo == proveedorActualizado.Codigo);
             if (validarProveedor != null)
             {
-                proveedorActualizado.Id = validarProveedor.Id;//Asigno al proveedor actualizado el mismo Id que el original
-                context.Proveedores.Remove(validarProveedor); //Elimino el proveedor original
-                context.Proveedores.Add(proveedorActualizado); //Agrego el proveedor actualizado con el Id del proveedor original
-                context.SaveChanges();
-                return true;
+                context.Proveedores.Update(proveedorActualizado);
+                return context.SaveChanges() > 0;
             }
             return false;
         }

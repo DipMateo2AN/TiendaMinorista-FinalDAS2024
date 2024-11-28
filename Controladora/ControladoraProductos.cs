@@ -27,11 +27,8 @@ namespace Controladora
             var validarProducto = context.Productos.FirstOrDefault(p => p.Codigo == productoActualizado.Codigo);
             if (validarProducto != null)
             {
-                productoActualizado.Id = validarProducto.Id;//Asigno al producto actualizado el mismo Id que el original
-                context.Productos.Remove(validarProducto); //Elimino el producto original
-                context.Productos.Add(productoActualizado); //Agrego el producto actualizado con el Id del producto original
-                context.SaveChanges();
-                return true;
+                context.Productos.Update(productoActualizado);
+                return context.SaveChanges() > 0;
             }
             return false;
         }
