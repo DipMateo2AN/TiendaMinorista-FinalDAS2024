@@ -23,5 +23,11 @@ namespace Vista
             FormProveedores form = new FormProveedores();
             form.ShowDialog();
         }
+
+        private void categoriaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormCategorias cat = new FormCategorias();
+            cat.ShowDialog();
+        }
     }
 }

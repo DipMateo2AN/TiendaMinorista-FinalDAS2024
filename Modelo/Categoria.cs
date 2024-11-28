@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Modelo
@@ -36,15 +37,21 @@ namespace Modelo
             return false;
         }
 
-        public bool EliminarProducto(Producto productoAEliminar)
+        public bool ModificarProducto(List<Producto> productos)
         {
-            var productoRepetido = Productos.FirstOrDefault(p => p.Codigo == productoAEliminar.Codigo);
-            if (productoRepetido != null)
+            Productos.Clear();
+
+            foreach (var producto in productos)
             {
-                Productos.Remove(productoAEliminar);
-                return true;
+                Productos.Add(producto);
             }
-            return false;
+
+            return true;
+        }
+
+        public string NombreProductos // Para poder ver los grupos en la grilla
+        {
+            get => string.Join(", ", Productos.Select(f => f.Nombre));
         }
     }
 }

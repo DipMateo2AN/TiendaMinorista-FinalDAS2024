@@ -1,6 +1,7 @@
 ﻿using Modelo;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,6 +44,16 @@ namespace Controladora
                 return true;
             }
             return false;
+        }
+
+        public ReadOnlyCollection<Categoria> ListarCategorias()
+        {
+            return context.Categorias.ToList().AsReadOnly();
+        }
+
+        public ReadOnlyCollection<Producto> ListarProductos()
+        {
+            return context.Productos.ToList().AsReadOnly();
         }
 
     }
