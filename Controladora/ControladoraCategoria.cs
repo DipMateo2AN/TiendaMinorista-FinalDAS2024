@@ -34,26 +34,14 @@ namespace Controladora
             return false;
         }
 
-        public bool EliminarCategorias(Categoria categoria)
+        public List<Categoria> ListarCategorias()
         {
-            var validarCategoria = context.Categorias.FirstOrDefault(p => p.Codigo == categoria.Codigo);
-            if (validarCategoria != null)
-            {
-                context.Categorias.Remove(validarCategoria);
-                context.SaveChanges();
-                return true;
-            }
-            return false;
+            return context.Categorias.ToList();
         }
 
-        public ReadOnlyCollection<Categoria> ListarCategorias()
+        public List<Producto> ListarProductos()
         {
-            return context.Categorias.ToList().AsReadOnly();
-        }
-
-        public ReadOnlyCollection<Producto> ListarProductos()
-        {
-            return context.Productos.ToList().AsReadOnly();
+            return context.Productos.ToList();
         }
 
     }

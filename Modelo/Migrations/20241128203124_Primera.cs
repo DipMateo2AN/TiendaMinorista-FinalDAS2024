@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Modelo.Migrations
 {
     /// <inheritdoc />
-    public partial class AjustarRestriccionesCascada : Migration
+    public partial class Primera : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -88,7 +88,7 @@ namespace Modelo.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Numero = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Numero = table.Column<int>(type: "int", nullable: false),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ClienteId = table.Column<int>(type: "int", nullable: false),
                     Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
@@ -126,6 +126,25 @@ namespace Modelo.Migrations
                         principalTable: "Producto",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductoImportado",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    PaisImportacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FechaImportacion = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductoImportado", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductoImportado_Producto_Id",
+                        column: x => x.Id,
+                        principalTable: "Producto",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -249,6 +268,9 @@ namespace Modelo.Migrations
 
             migrationBuilder.DropTable(
                 name: "FacturaDetalleFactura");
+
+            migrationBuilder.DropTable(
+                name: "ProductoImportado");
 
             migrationBuilder.DropTable(
                 name: "ProveedorProducto");

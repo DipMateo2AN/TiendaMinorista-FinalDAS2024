@@ -12,8 +12,8 @@ using Modelo;
 namespace Modelo.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20241128184115_Cuarta")]
-    partial class Cuarta
+    [Migration("20241128203124_Primera")]
+    partial class Primera
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -202,6 +202,8 @@ namespace Modelo.Migrations
                     b.HasIndex("CategoriaId");
 
                     b.ToTable("Producto", (string)null);
+
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("Modelo.Proveedor", b =>
@@ -246,6 +248,20 @@ namespace Modelo.Migrations
                     b.HasIndex("ProveedorId");
 
                     b.ToTable("ProveedorProducto");
+                });
+
+            modelBuilder.Entity("Modelo.ProductoImportado", b =>
+                {
+                    b.HasBaseType("Modelo.Producto");
+
+                    b.Property<DateTime>("FechaImportacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaisImportacion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("ProductoImportado", (string)null);
                 });
 
             modelBuilder.Entity("CategoriaProducto", b =>
@@ -331,6 +347,15 @@ namespace Modelo.Migrations
                         .WithMany()
                         .HasForeignKey("ProveedorId")
                         .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Modelo.ProductoImportado", b =>
+                {
+                    b.HasOne("Modelo.Producto", null)
+                        .WithOne()
+                        .HasForeignKey("Modelo.ProductoImportado", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

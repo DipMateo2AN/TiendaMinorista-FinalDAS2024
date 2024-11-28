@@ -15,7 +15,8 @@ namespace Vista
 
         private void productoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FormProductos form = new FormProductos();
+            form.ShowDialog();
         }
 
         private void proveedorToolStripMenuItem_Click(object sender, EventArgs e)

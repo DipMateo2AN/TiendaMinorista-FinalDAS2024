@@ -30,10 +30,11 @@
         {
             btnSalir = new Button();
             dgvDatos = new DataGridView();
+            Codigo = new DataGridViewTextBoxColumn();
+            Nombre = new DataGridViewTextBoxColumn();
+            Descripcion = new DataGridViewTextBoxColumn();
+            Productos = new DataGridViewTextBoxColumn();
             gBoxCliente = new GroupBox();
-            checkedProductos = new CheckedListBox();
-            label4 = new Label();
-            btnEliminar = new Button();
             btnModificar = new Button();
             btnAgregar = new Button();
             label3 = new Label();
@@ -59,17 +60,43 @@
             // dgvDatos
             // 
             dgvDatos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvDatos.Columns.AddRange(new DataGridViewColumn[] { Codigo, Nombre, Descripcion, Productos });
             dgvDatos.Location = new Point(280, 30);
             dgvDatos.Name = "dgvDatos";
             dgvDatos.Size = new Size(454, 218);
             dgvDatos.TabIndex = 13;
             dgvDatos.CellClick += dgvDatos_CellClick;
             // 
+            // Codigo
+            // 
+            Codigo.DataPropertyName = "Codigo";
+            Codigo.HeaderText = "Codigo";
+            Codigo.Name = "Codigo";
+            Codigo.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            Nombre.DataPropertyName = "Nombre";
+            Nombre.HeaderText = "Nombre";
+            Nombre.Name = "Nombre";
+            Nombre.ReadOnly = true;
+            // 
+            // Descripcion
+            // 
+            Descripcion.DataPropertyName = "Descripcion";
+            Descripcion.HeaderText = "Descripcion";
+            Descripcion.Name = "Descripcion";
+            Descripcion.ReadOnly = true;
+            // 
+            // Productos
+            // 
+            Productos.DataPropertyName = "NombreProductos";
+            Productos.HeaderText = "Productos";
+            Productos.Name = "Productos";
+            Productos.ReadOnly = true;
+            // 
             // gBoxCliente
             // 
-            gBoxCliente.Controls.Add(checkedProductos);
-            gBoxCliente.Controls.Add(label4);
-            gBoxCliente.Controls.Add(btnEliminar);
             gBoxCliente.Controls.Add(btnModificar);
             gBoxCliente.Controls.Add(btnAgregar);
             gBoxCliente.Controls.Add(label3);
@@ -80,41 +107,14 @@
             gBoxCliente.Controls.Add(txtCodigo);
             gBoxCliente.Location = new Point(31, 30);
             gBoxCliente.Name = "gBoxCliente";
-            gBoxCliente.Size = new Size(217, 383);
+            gBoxCliente.Size = new Size(217, 227);
             gBoxCliente.TabIndex = 12;
             gBoxCliente.TabStop = false;
             gBoxCliente.Text = "Datos:";
             // 
-            // checkedProductos
-            // 
-            checkedProductos.FormattingEnabled = true;
-            checkedProductos.Location = new Point(17, 156);
-            checkedProductos.Name = "checkedProductos";
-            checkedProductos.Size = new Size(181, 112);
-            checkedProductos.TabIndex = 12;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(17, 135);
-            label4.Name = "label4";
-            label4.Size = new Size(64, 15);
-            label4.TabIndex = 11;
-            label4.Text = "Productos:";
-            // 
-            // btnEliminar
-            // 
-            btnEliminar.Location = new Point(37, 343);
-            btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(149, 23);
-            btnEliminar.TabIndex = 10;
-            btnEliminar.Text = "Eliminar";
-            btnEliminar.UseVisualStyleBackColor = true;
-            btnEliminar.Click += btnEliminar_Click;
-            // 
             // btnModificar
             // 
-            btnModificar.Location = new Point(37, 317);
+            btnModificar.Location = new Point(36, 174);
             btnModificar.Name = "btnModificar";
             btnModificar.Size = new Size(149, 23);
             btnModificar.TabIndex = 9;
@@ -124,7 +124,7 @@
             // 
             // btnAgregar
             // 
-            btnAgregar.Location = new Point(37, 288);
+            btnAgregar.Location = new Point(36, 145);
             btnAgregar.Name = "btnAgregar";
             btnAgregar.Size = new Size(149, 23);
             btnAgregar.TabIndex = 8;
@@ -184,12 +184,13 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(752, 424);
+            ClientSize = new Size(752, 293);
             Controls.Add(btnSalir);
             Controls.Add(dgvDatos);
             Controls.Add(gBoxCliente);
             Name = "FormCategorias";
             Text = "FormCategorias";
+            Load += FormCategorias_Load;
             ((System.ComponentModel.ISupportInitialize)dgvDatos).EndInit();
             gBoxCliente.ResumeLayout(false);
             gBoxCliente.PerformLayout();
@@ -201,10 +202,8 @@
         protected Button btnSalir;
         protected DataGridView dgvDatos;
         protected GroupBox gBoxCliente;
-        private Button btnEliminar;
         private Button btnModificar;
         private Button btnAgregar;
-        private Label label4;
         private TextBox txtContacto;
         private Label label3;
         private TextBox txtDescripcion;
@@ -212,6 +211,9 @@
         private TextBox txtNombre;
         private Label label1;
         private TextBox txtCodigo;
-        private CheckedListBox checkedProductos;
+        private DataGridViewTextBoxColumn Codigo;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewTextBoxColumn Descripcion;
+        private DataGridViewTextBoxColumn Productos;
     }
 }

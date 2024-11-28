@@ -12,7 +12,5 @@ namespace Modelo
         public string PaisImportacion {get; set;}
         public DateTime FechaImportacion {get; set;}
 
-        public int CodigoImportacion {get; set;}
-
     }
 }

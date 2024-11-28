@@ -18,8 +18,10 @@ namespace Modelo
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Proveedor> Proveedores { get; set; }
 
+        public DbSet<ProductoImportado> ProductosImportados { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-           => options.UseSqlServer($"Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=TiendaMinoristasdb;");
+           => options.UseSqlServer($"Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=TiendaMinoristaBaseD;");
 
         protected override void OnModelCreating(ModelBuilder model)
         {
@@ -30,6 +32,7 @@ namespace Modelo
             model.Entity<Factura>().ToTable("Factura").HasKey(f => f.Id);
             model.Entity<Producto>().ToTable("Producto").HasKey(p => p.Id);
             model.Entity<Proveedor>().ToTable("Proveedor").HasKey(p => p.Id);
+            model.Entity<ProductoImportado>().ToTable("ProductoImportado").HasBaseType<Producto>();
 
             // Configurar relaciones muchos-a-muchos
             model.Entity<Categoria>()

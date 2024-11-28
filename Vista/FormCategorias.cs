@@ -20,7 +20,7 @@ namespace Vista
             InitializeComponent();
             controladora = new ControladoraCategoria();
             Actualizar();
-            CargarProductos();
+
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -32,10 +32,6 @@ namespace Vista
                 cat.Nombre = txtNombre.Text;
                 cat.Descripcion = txtDescripcion.Text;
 
-                foreach (var productos in checkedProductos.CheckedItems)
-                {
-                    cat.AgregarProducto((Producto)productos);
-                }
 
                 if (controladora.CrearCategoria(cat))
                 {
@@ -59,12 +55,7 @@ namespace Vista
                     cat.Codigo = txtCodigo.Text;
                     cat.Nombre = txtNombre.Text;
                     cat.Descripcion = txtDescripcion.Text;
-                    List<Producto> productos = new List<Producto>();
-                    foreach (var producto in checkedProductos.CheckedItems)
-                    {
-                        productos.Add((Producto)producto);
-                    }
-                    cat.ModificarProducto(productos);
+
 
                     if (controladora.ModificarCategoria(cat))
                     {
@@ -78,25 +69,10 @@ namespace Vista
                 }
             }
         }
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            if (dgvDatos.Rows.Count > 0)
-            {
-                var cat = (Categoria)dgvDatos.CurrentRow.DataBoundItem;
-                if (controladora.EliminarCategorias(cat))
-                {
-                    MessageBox.Show("Eliminado.", "Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Actualizar();
-                }
-                else
-                {
-                    MessageBox.Show("Error al eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
 
         public void Actualizar()
         {
+            dgvDatos.AutoGenerateColumns = false;
             dgvDatos.DataSource = null;
             dgvDatos.DataSource = controladora.ListarCategorias();
         }
@@ -140,11 +116,9 @@ namespace Vista
             this.Close();
         }
 
-        public void CargarProductos()
+        private void FormCategorias_Load(object sender, EventArgs e)
         {
-            checkedProductos.DataSource = null;
-            checkedProductos.DataSource = controladora.ListarProductos();
-            checkedProductos.DisplayMember = "Nombre";
+            Actualizar();
         }
     }
 }

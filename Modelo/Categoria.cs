@@ -37,16 +37,16 @@ namespace Modelo
             return false;
         }
 
-        public bool ModificarProducto(List<Producto> productos)
+        public bool ModificarProducto(Producto nuevoProducto)
         {
-            Productos.Clear();
-
-            foreach (var producto in productos)
+            var productoRepetido = Productos.FirstOrDefault(p => p.Codigo == nuevoProducto.Codigo);
+            if (productoRepetido != null)
             {
-                Productos.Add(producto);
+                Productos.Remove(productoRepetido);
+                Productos.Add(nuevoProducto);
+                return true;
             }
-
-            return true;
+            return false;
         }
 
         public string NombreProductos // Para poder ver los grupos en la grilla
