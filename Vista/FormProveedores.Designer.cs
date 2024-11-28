@@ -48,7 +48,7 @@
             // 
             // btnSalir
             // 
-            btnSalir.Location = new Point(622, 281);
+            btnSalir.Location = new Point(575, 251);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(149, 23);
             btnSalir.TabIndex = 14;
@@ -59,7 +59,7 @@
             // dgvDatos
             // 
             dgvDatos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvDatos.Location = new Point(317, 54);
+            dgvDatos.Location = new Point(270, 24);
             dgvDatos.Name = "dgvDatos";
             dgvDatos.Size = new Size(454, 218);
             dgvDatos.TabIndex = 13;
@@ -78,7 +78,7 @@
             gBoxCliente.Controls.Add(txtNombre);
             gBoxCliente.Controls.Add(label1);
             gBoxCliente.Controls.Add(txtCodigo);
-            gBoxCliente.Location = new Point(68, 54);
+            gBoxCliente.Location = new Point(21, 24);
             gBoxCliente.Name = "gBoxCliente";
             gBoxCliente.Size = new Size(217, 250);
             gBoxCliente.TabIndex = 12;
@@ -183,7 +183,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(838, 358);
+            ClientSize = new Size(763, 309);
             Controls.Add(btnSalir);
             Controls.Add(dgvDatos);
             Controls.Add(gBoxCliente);
