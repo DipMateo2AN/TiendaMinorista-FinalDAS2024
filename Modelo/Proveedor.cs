@@ -43,5 +43,18 @@ namespace Modelo
             }
             return false;
         }
+
+        public int VerificarStockDeProducto(Producto producto)
+        {
+            var buscarProducto = Productos.FirstOrDefault(p=>p.Codigo==producto.Codigo);
+            if (buscarProducto != null)
+            {
+                return buscarProducto.Stock;
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 }
