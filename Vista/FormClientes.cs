@@ -96,7 +96,6 @@ namespace Vista
 
         private void ActualizarGrilla()
         {
-            dgvDatos.AutoGenerateColumns = false;
             dgvDatos.DataSource = null;
             dgvDatos.DataSource = controladora.ListarClientes();
         }
