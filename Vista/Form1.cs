@@ -20,7 +20,8 @@ namespace Vista
 
         private void proveedorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FormProveedores form = new FormProveedores();
+            form.ShowDialog();
         }
     }
 }
