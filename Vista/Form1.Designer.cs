@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             menuStrip1 = new MenuStrip();
-            TituloBienvenida = new Label();
             gestionToolStripMenuItem = new ToolStripMenuItem();
-            asignacionToolStripMenuItem = new ToolStripMenuItem();
-            reporteToolStripMenuItem = new ToolStripMenuItem();
             clienteToolStripMenuItem = new ToolStripMenuItem();
             productoToolStripMenuItem = new ToolStripMenuItem();
             proveedorToolStripMenuItem = new ToolStripMenuItem();
+            asignacionToolStripMenuItem = new ToolStripMenuItem();
+            reporteToolStripMenuItem = new ToolStripMenuItem();
+            TituloBienvenida = new Label();
+            categoriaToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -48,34 +49,12 @@
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
-            // TituloBienvenida
-            // 
-            TituloBienvenida.AutoSize = true;
-            TituloBienvenida.Font = new Font("Segoe UI", 40F);
-            TituloBienvenida.Location = new Point(10, 80);
-            TituloBienvenida.Name = "TituloBienvenida";
-            TituloBienvenida.Size = new Size(325, 72);
-            TituloBienvenida.TabIndex = 1;
-            TituloBienvenida.Text = "¡Bienvenido!";
-            // 
             // gestionToolStripMenuItem
             // 
-            gestionToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clienteToolStripMenuItem, productoToolStripMenuItem, proveedorToolStripMenuItem });
+            gestionToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clienteToolStripMenuItem, productoToolStripMenuItem, proveedorToolStripMenuItem, categoriaToolStripMenuItem });
             gestionToolStripMenuItem.Name = "gestionToolStripMenuItem";
             gestionToolStripMenuItem.Size = new Size(59, 20);
             gestionToolStripMenuItem.Text = "Gestion";
-            // 
-            // asignacionToolStripMenuItem
-            // 
-            asignacionToolStripMenuItem.Name = "asignacionToolStripMenuItem";
-            asignacionToolStripMenuItem.Size = new Size(78, 20);
-            asignacionToolStripMenuItem.Text = "Asignacion";
-            // 
-            // reporteToolStripMenuItem
-            // 
-            reporteToolStripMenuItem.Name = "reporteToolStripMenuItem";
-            reporteToolStripMenuItem.Size = new Size(60, 20);
-            reporteToolStripMenuItem.Text = "Reporte";
             // 
             // clienteToolStripMenuItem
             // 
@@ -97,6 +76,35 @@
             proveedorToolStripMenuItem.Size = new Size(180, 22);
             proveedorToolStripMenuItem.Text = "Proveedores";
             proveedorToolStripMenuItem.Click += proveedorToolStripMenuItem_Click;
+            // 
+            // asignacionToolStripMenuItem
+            // 
+            asignacionToolStripMenuItem.Name = "asignacionToolStripMenuItem";
+            asignacionToolStripMenuItem.Size = new Size(78, 20);
+            asignacionToolStripMenuItem.Text = "Asignacion";
+            // 
+            // reporteToolStripMenuItem
+            // 
+            reporteToolStripMenuItem.Name = "reporteToolStripMenuItem";
+            reporteToolStripMenuItem.Size = new Size(60, 20);
+            reporteToolStripMenuItem.Text = "Reporte";
+            // 
+            // TituloBienvenida
+            // 
+            TituloBienvenida.AutoSize = true;
+            TituloBienvenida.Font = new Font("Segoe UI", 40F);
+            TituloBienvenida.Location = new Point(10, 80);
+            TituloBienvenida.Name = "TituloBienvenida";
+            TituloBienvenida.Size = new Size(325, 72);
+            TituloBienvenida.TabIndex = 1;
+            TituloBienvenida.Text = "¡Bienvenido!";
+            // 
+            // categoriaToolStripMenuItem
+            // 
+            categoriaToolStripMenuItem.Name = "categoriaToolStripMenuItem";
+            categoriaToolStripMenuItem.Size = new Size(180, 22);
+            categoriaToolStripMenuItem.Text = "Categoria";
+            categoriaToolStripMenuItem.Click += categoriaToolStripMenuItem_Click;
             // 
             // Form1
             // 
@@ -124,5 +132,6 @@
         private ToolStripMenuItem asignacionToolStripMenuItem;
         private ToolStripMenuItem reporteToolStripMenuItem;
         private Label TituloBienvenida;
+        private ToolStripMenuItem categoriaToolStripMenuItem;
     }
 }

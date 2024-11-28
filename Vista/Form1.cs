@@ -22,5 +22,11 @@ namespace Vista
         {
 
         }
+
+        private void categoriaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormCategorias cat = new FormCategorias();
+            cat.ShowDialog();
+        }
     }
 }
