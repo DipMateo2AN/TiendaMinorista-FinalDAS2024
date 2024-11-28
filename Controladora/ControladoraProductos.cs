@@ -17,8 +17,9 @@ namespace Controladora
             if (validarProducto == null)
             {
                 context.Productos.Add(producto);
-                cat.AgregarProducto(producto);
-                context.Categorias.Update(cat);
+                producto.Categoria.AgregarProducto(producto);
+                
+                context.Categorias.Update(producto.Categoria);
                 context.SaveChanges();
                 return true;
             }

@@ -32,7 +32,7 @@ namespace Vista
                 cat.Nombre = txtNombre.Text;
                 cat.Descripcion = txtDescripcion.Text;
 
-
+                //MessageBox.Show(cat.NombreProductos());
                 if (controladora.CrearCategoria(cat))
                 {
                     MessageBox.Show("Agregado.", "Agregado", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -72,9 +72,10 @@ namespace Vista
 
         public void Actualizar()
         {
-            dgvDatos.AutoGenerateColumns = false;
+            //dgvDatos.AutoGenerateColumns = false;
             dgvDatos.DataSource = null;
-            dgvDatos.DataSource = controladora.ListarCategorias();
+            dgvDatos.DataSource = controladora.ListarCategorias().AsReadOnly();
+
         }
 
         private bool ValidarCampos()

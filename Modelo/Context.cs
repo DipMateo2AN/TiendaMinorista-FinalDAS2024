@@ -21,7 +21,7 @@ namespace Modelo
         public DbSet<ProductoImportado> ProductosImportados { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-           => options.UseSqlServer($"Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=TiendaMinoristaBaseD;");
+           => options.UseSqlServer($"Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=TiendaMinoristaDB;");
 
         protected override void OnModelCreating(ModelBuilder model)
         {
@@ -90,6 +90,11 @@ namespace Modelo
 
             model.Entity<DetalleFactura>()
                 .HasOne(d => d.Producto)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            model.Entity<Producto>()
+                .HasOne(p => p.Categoria)
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict);
         }

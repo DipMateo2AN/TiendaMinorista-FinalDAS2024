@@ -15,6 +15,7 @@ namespace Vista
     public partial class FormProductos : Form
     {
         ControladoraProductos controladora;
+        //ControladoraCategoria controladoraCategoria = ControladoraCategoria.Instancia;
         public FormProductos()
         {
             InitializeComponent();
@@ -51,7 +52,7 @@ namespace Vista
                         producto.Stock = Convert.ToInt32(txtStock.Text);
                         producto.Categoria = (Categoria)cmbCategorias.SelectedItem;
 
-                        if (controladora.CrearProducto(producto,(Categoria)cmbCategorias.SelectedItem))
+                        if (controladora.CrearProducto(producto, (Categoria)cmbCategorias.SelectedItem))
                         {
                             MessageBox.Show("Producto agregado correctamente.", "Agregado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             Actualizar();
@@ -292,8 +293,13 @@ namespace Vista
                 txtStock.Focus();
                 return false;
             }
-   
+
             return true;
+        }
+
+        private void FormProductos_Load(object sender, EventArgs e)
+        {
+            Actualizar();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Modelo;
+﻿using Microsoft.EntityFrameworkCore;
+using Modelo;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,9 @@ namespace Controladora
 {
     public class ControladoraCategoria
     {
+        //private static readonly Lazy<ControladoraCategoria> instancia = new Lazy<ControladoraCategoria>(() => new ControladoraCategoria());
+        //public static ControladoraCategoria Instancia => instancia.Value;
+
         private Context context = new Context();
         public bool CrearCategoria(Categoria categoria)
         {
@@ -36,7 +40,7 @@ namespace Controladora
 
         public List<Categoria> ListarCategorias()
         {
-            return context.Categorias.ToList();
+            return context.Categorias.Include(x=>x.Productos).ToList();
         }
 
         public List<Producto> ListarProductos()

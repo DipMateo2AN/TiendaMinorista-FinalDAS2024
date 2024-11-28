@@ -14,7 +14,7 @@ namespace Modelo
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
 
-        public List<Producto> Productos;
+        public List<Producto> Productos { get; set; }
 
         public Categoria()
         {
@@ -49,9 +49,13 @@ namespace Modelo
             return false;
         }
 
-        public string NombreProductos // Para poder ver los grupos en la grilla
+        public string NombreProductos// Para poder ver los grupos en la grilla
         {
-            get => string.Join(", ", Productos.Select(f => f.Nombre));
+            get => Productos != null && Productos.Count > 0 ? string.Join(" ❤️ ", Productos.Select(f => f.Nombre)) : "Sin productos";
+        }
+        public override string ToString()
+        {
+            return Nombre;
         }
     }
 }

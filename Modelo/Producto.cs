@@ -46,6 +46,11 @@ namespace Modelo
             return Precio;
         }
 
+        public override string ToString()
+        {
+            return Nombre;
+        }
+
         /////////////////////////////////////////
     }
 }
