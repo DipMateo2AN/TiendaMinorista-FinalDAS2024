@@ -162,7 +162,7 @@ namespace Vista
             switch (cmbTipo.Text)
             {
                 case "Nacional":
-                    if (dgvProductos.Rows.Count > 0)
+                    if (dgvProductos.Rows.Count == 1)
                     {
                         var producto = (Producto)dgvProductos.CurrentRow.DataBoundItem;
 
@@ -175,11 +175,10 @@ namespace Vista
                         {
                             MessageBox.Show("No se pudo eliminar el producto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
-
                     }
                     break;
                 case "Importado":
-                    if (dgvProductosImportados.Rows.Count > 0)
+                    if (dgvProductosImportados.Rows.Count == 1)
                     {
                         var producto = (ProductoImportado)dgvProductosImportados.CurrentRow.DataBoundItem;
 
@@ -192,8 +191,6 @@ namespace Vista
                         {
                             MessageBox.Show("No se pudo eliminar el producto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
-
-
                     }
                     break;
                 default:

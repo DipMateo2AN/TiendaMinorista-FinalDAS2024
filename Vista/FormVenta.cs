@@ -19,20 +19,42 @@ namespace Vista
 
         private void btnAbrir_Click(object sender, EventArgs e)
         {
+            //if (ValidarCampos())
+            //{
+            //    factura = new Factura();
+            //    factura.Numero = int.Parse(txtNumero.Text);
+            //    factura.Fecha = DateTime.Now;
+            //    factura.Cliente = controladora.ListarClientes().FirstOrDefault(x => x.Codigo == cmbCliente.Text);
+            //    gBoxDetalle.Enabled = true;
+            //    btnCerrar.Enabled = true;
+            //}
+
             if (ValidarCampos())
             {
-                factura = new Factura();
-                factura.Numero = int.Parse(txtNumero.Text);
-                factura.Fecha = DateTime.Now;
-                factura.Cliente = controladora.ListarClientes().FirstOrDefault(x => x.Codigo == cmbCliente.Text);
-                gBoxDetalle.Enabled = true;
-                btnCerrar.Enabled = true;
+                factura = new Factura
+                {
+                    Numero = int.Parse(txtNumero.Text),
+                    Fecha = DateTime.Now,
+                    Cliente = controladora.ListarClientes().FirstOrDefault(x => x.Codigo == cmbCliente.Text)
+                };
+
+                // Guarda la factura en la base de datos
+                if (controladora.CrearFactura(factura))
+                {
+                    gBoxDetalle.Enabled = true;
+                    btnCerrar.Enabled = true;
+                    MessageBox.Show("Factura creada correctamente.");
+                }
+                else
+                {
+                    MessageBox.Show("Error al crear la factura.");
+                }
             }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            
+             
             if (ValidarCamposDetalle())
             {
                 DetalleFactura detalle = new DetalleFactura();

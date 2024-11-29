@@ -17,7 +17,6 @@ namespace Modelo
         public DbSet<Factura> Facturas { get; set; }
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Proveedor> Proveedores { get; set; }
-
         public DbSet<ProductoImportado> ProductosImportados { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
@@ -57,7 +56,7 @@ namespace Modelo
                     j => j.HasOne<Producto>()
                           .WithMany()
                           .HasForeignKey("ProductoId")
-                          .OnDelete(DeleteBehavior.Restrict), // Evitar eliminación en cascada
+                          .OnDelete(DeleteBehavior.Cascade),
                     j => j.HasOne<Proveedor>()
                           .WithMany()
                           .HasForeignKey("ProveedorId")

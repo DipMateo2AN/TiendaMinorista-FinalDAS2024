@@ -45,6 +45,8 @@
             dgvFacturas = new DataGridView();
             dgvDetallesFactura = new DataGridView();
             btnSalir = new Button();
+            label2 = new Label();
+            label7 = new Label();
             gBoxFactura.SuspendLayout();
             gBoxDetalle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvFacturas).BeginInit();
@@ -77,7 +79,7 @@
             // btnCerrar
             // 
             btnCerrar.Enabled = false;
-            btnCerrar.Location = new Point(138, 148);
+            btnCerrar.Location = new Point(138, 134);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(75, 23);
             btnCerrar.TabIndex = 9;
@@ -87,7 +89,7 @@
             // 
             // btnAbrir
             // 
-            btnAbrir.Location = new Point(13, 148);
+            btnAbrir.Location = new Point(13, 134);
             btnAbrir.Name = "btnAbrir";
             btnAbrir.Size = new Size(75, 23);
             btnAbrir.TabIndex = 8;
@@ -129,16 +131,16 @@
             gBoxDetalle.Controls.Add(label4);
             gBoxDetalle.Controls.Add(cmbProducto);
             gBoxDetalle.Enabled = false;
-            gBoxDetalle.Location = new Point(28, 217);
+            gBoxDetalle.Location = new Point(28, 240);
             gBoxDetalle.Name = "gBoxDetalle";
-            gBoxDetalle.Size = new Size(229, 164);
+            gBoxDetalle.Size = new Size(229, 162);
             gBoxDetalle.TabIndex = 1;
             gBoxDetalle.TabStop = false;
             gBoxDetalle.Text = "Detalle:";
             // 
             // txtCantidad
             // 
-            txtCantidad.Location = new Point(113, 60);
+            txtCantidad.Location = new Point(113, 71);
             txtCantidad.Name = "txtCantidad";
             txtCantidad.Size = new Size(100, 23);
             txtCantidad.TabIndex = 11;
@@ -146,7 +148,7 @@
             // btnEliminar
             // 
             btnEliminar.Enabled = false;
-            btnEliminar.Location = new Point(138, 124);
+            btnEliminar.Location = new Point(138, 122);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(75, 23);
             btnEliminar.TabIndex = 11;
@@ -155,7 +157,7 @@
             // 
             // btnAgregar
             // 
-            btnAgregar.Location = new Point(13, 124);
+            btnAgregar.Location = new Point(13, 122);
             btnAgregar.Name = "btnAgregar";
             btnAgregar.Size = new Size(75, 23);
             btnAgregar.TabIndex = 11;
@@ -166,7 +168,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(13, 68);
+            label5.Location = new Point(13, 79);
             label5.Name = "label5";
             label5.Size = new Size(58, 15);
             label5.TabIndex = 13;
@@ -175,7 +177,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(13, 39);
+            label4.Location = new Point(13, 50);
             label4.Name = "label4";
             label4.Size = new Size(59, 15);
             label4.TabIndex = 11;
@@ -184,7 +186,7 @@
             // cmbProducto
             // 
             cmbProducto.FormattingEnabled = true;
-            cmbProducto.Location = new Point(113, 31);
+            cmbProducto.Location = new Point(113, 42);
             cmbProducto.Name = "cmbProducto";
             cmbProducto.Size = new Size(100, 23);
             cmbProducto.TabIndex = 11;
@@ -192,7 +194,7 @@
             // dgvFacturas
             // 
             dgvFacturas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvFacturas.Location = new Point(314, 21);
+            dgvFacturas.Location = new Point(314, 42);
             dgvFacturas.Name = "dgvFacturas";
             dgvFacturas.Size = new Size(451, 150);
             dgvFacturas.TabIndex = 2;
@@ -200,7 +202,7 @@
             // dgvDetallesFactura
             // 
             dgvDetallesFactura.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvDetallesFactura.Location = new Point(314, 204);
+            dgvDetallesFactura.Location = new Point(314, 223);
             dgvDetallesFactura.Name = "dgvDetallesFactura";
             dgvDetallesFactura.Size = new Size(451, 150);
             dgvDetallesFactura.TabIndex = 3;
@@ -208,18 +210,38 @@
             // btnSalir
             // 
             btnSalir.Enabled = false;
-            btnSalir.Location = new Point(690, 360);
+            btnSalir.Location = new Point(690, 379);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(75, 23);
             btnSalir.TabIndex = 14;
             btnSalir.Text = "Salir";
             btnSalir.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(314, 21);
+            label2.Name = "label2";
+            label2.Size = new Size(49, 15);
+            label2.TabIndex = 11;
+            label2.Text = "Factura:";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(314, 205);
+            label7.Name = "label7";
+            label7.Size = new Size(114, 15);
+            label7.TabIndex = 15;
+            label7.Text = "Detalle de la factura:";
+            // 
             // FormVenta
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 392);
+            ClientSize = new Size(800, 425);
+            Controls.Add(label7);
+            Controls.Add(label2);
             Controls.Add(btnSalir);
             Controls.Add(dgvDetallesFactura);
             Controls.Add(dgvFacturas);
@@ -234,6 +256,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvFacturas).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvDetallesFactura).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -258,5 +281,7 @@
         private DataGridView dgvDetallesFactura;
         private Button btnSalir;
         private TextBox txtCantidad;
+        private Label label2;
+        private Label label7;
     }
 }

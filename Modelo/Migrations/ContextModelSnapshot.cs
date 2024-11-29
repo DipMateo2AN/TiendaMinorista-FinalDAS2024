@@ -337,7 +337,7 @@ namespace Modelo.Migrations
                     b.HasOne("Modelo.Producto", null)
                         .WithMany()
                         .HasForeignKey("ProductoId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Modelo.Proveedor", null)
