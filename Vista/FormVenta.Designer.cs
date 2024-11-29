@@ -198,6 +198,7 @@
             dgvFacturas.Name = "dgvFacturas";
             dgvFacturas.Size = new Size(451, 150);
             dgvFacturas.TabIndex = 2;
+            dgvFacturas.SelectionChanged += dgvFacturas_SelectionChanged;
             // 
             // dgvDetallesFactura
             // 
@@ -239,7 +240,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 425);
+            ClientSize = new Size(802, 425);
             Controls.Add(label7);
             Controls.Add(label2);
             Controls.Add(btnSalir);

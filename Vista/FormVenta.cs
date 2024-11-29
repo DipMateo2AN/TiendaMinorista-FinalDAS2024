@@ -15,19 +15,11 @@ namespace Vista
             controladoraDetalle = new ControladoraDetallesDeFactura();
             ActualizarCmbClientes();
             ActualizarCmbProducto();
+            ActualizarGrillaFacturas();
         }
 
         private void btnAbrir_Click(object sender, EventArgs e)
         {
-            //if (ValidarCampos())
-            //{
-            //    factura = new Factura();
-            //    factura.Numero = int.Parse(txtNumero.Text);
-            //    factura.Fecha = DateTime.Now;
-            //    factura.Cliente = controladora.ListarClientes().FirstOrDefault(x => x.Codigo == cmbCliente.Text);
-            //    gBoxDetalle.Enabled = true;
-            //    btnCerrar.Enabled = true;
-            //}
 
             if (ValidarCampos())
             {
@@ -54,7 +46,6 @@ namespace Vista
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-             
             if (ValidarCamposDetalle())
             {
                 DetalleFactura detalle = new DetalleFactura();
@@ -66,7 +57,7 @@ namespace Vista
                 if (detalleCompleto != null)
                 {
                     factura.AgregarDetalleFactura(detalleCompleto);
-                    ActualizarGrillaDetalles();
+                    ActualizarGrillaDetalles(factura);
                 }
                 else
                 {
@@ -116,15 +107,7 @@ namespace Vista
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-            if (controladora.CrearFactura(factura))
-            {
-                ActualizarGrillaFacturas();
-                MessageBox.Show("Éxito.");
-            }
-            else
-            {
-                MessageBox.Show("Fracaso. 😭 ");
-            }
+            ActualizarGrillaFacturas();
         }
 
         private void ActualizarGrillaFacturas()
@@ -133,10 +116,11 @@ namespace Vista
             dgvFacturas.DataSource = controladora.ListarFacturas();
         }
 
-        private void ActualizarGrillaDetalles()
+        private void ActualizarGrillaDetalles(Factura factura)
         {
+            var fSeleccionada = controladora.ListarFacturas().FirstOrDefault(f => f.Numero == factura.Numero);
             dgvDetallesFactura.DataSource = null;
-            dgvDetallesFactura.DataSource = controladoraDetalle.ListarDetallesFacturas();
+            dgvDetallesFactura.DataSource = fSeleccionada.ListarDetallesFacturas().AsReadOnly();
         }
 
         private void ActualizarCmbClientes()
@@ -149,6 +133,12 @@ namespace Vista
         {
             cmbProducto.DataSource = null;
             cmbProducto.DataSource = controladora.ListarProductos();
+        }
+
+        private void dgvFacturas_SelectionChanged(object sender, EventArgs e)
+        {
+            var facturaSeleccionada = (Factura)dgvFacturas.CurrentRow.DataBoundItem;
+            ActualizarGrillaDetalles(facturaSeleccionada);
         }
     }
 }
