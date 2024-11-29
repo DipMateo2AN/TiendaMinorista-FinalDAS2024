@@ -1,4 +1,5 @@
-﻿using Modelo;
+﻿using Microsoft.EntityFrameworkCore;
+using Modelo;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -70,28 +71,69 @@ namespace Controladora
 
         public bool EliminarProducto(Producto producto)
         {
-            var validarProducto = context.Productos.FirstOrDefault(p => p.Codigo == producto.Codigo);
-            if (validarProducto != null)
+            // Obtener el ID del producto
+            var productoId = producto.Id;
+
+            // 1. Eliminar manualmente las relaciones en la tabla intermedia CategoriaProducto
+            var relaciones = context.Set<Dictionary<string, object>>("CategoriaProducto")
+                .Where(cp => EF.Property<int>(cp, "ProductoId") == productoId)
+                .ToList();
+
+            if (relaciones.Any())
             {
-                context.Productos.Remove(validarProducto);
+                context.Set<Dictionary<string, object>>("CategoriaProducto").RemoveRange(relaciones);
                 context.SaveChanges();
-                return true;
             }
-            return false;
+
+            // 2. Verificar que se hayan eliminado todas las relaciones
+            var relacionesRestantes = context.Set<Dictionary<string, object>>("CategoriaProducto")
+                .Any(cp => EF.Property<int>(cp, "ProductoId") == productoId);
+
+            if (relacionesRestantes)
+            {
+                throw new Exception("No se pudieron eliminar todas las relaciones del producto en la tabla intermedia.");
+            }
+
+            // 3. Eliminar el producto
+            context.Productos.Remove(producto);
+
+            // 4. Guardar cambios finales
+            return context.SaveChanges() > 0;
         }
 
-        public bool EliminarProducto(ProductoImportado producto)
+       /* public bool EliminarProducto(ProductoImportado producto)
         {
-            var validarProducto = context.ProductosImportados.FirstOrDefault(p => p.Codigo == producto.Codigo);
-            if (validarProducto != null)
-            {
-                context.ProductosImportados.Remove(validarProducto);
-                context.SaveChanges();
-                return true;
-            }
-            return false;
-        }
+            // Obtener el ID del producto
+            var productoId = producto.Id;
 
+            // 1. Eliminar manualmente las relaciones en la tabla intermedia CategoriaProducto
+            var relaciones = context.Set<Dictionary<string, object>>("CategoriaProducto")
+                .Where(cp => EF.Property<int>(cp, "ProductoId") == productoId)
+                .ToList();
+
+            if (relaciones.Any())
+            {
+                context.Set<Dictionary<string, object>>("CategoriaProducto").RemoveRange(relaciones);
+                context.SaveChanges();
+            }
+
+            // 2. Verificar que se hayan eliminado todas las relaciones
+            var relacionesRestantes = context.Set<Dictionary<string, object>>("CategoriaProducto")
+                .Any(cp => EF.Property<int>(cp, "ProductoId") == productoId);
+
+            if (relacionesRestantes)
+            {
+                throw new Exception("No se pudieron eliminar todas las relaciones del producto en la tabla intermedia.");
+            }
+
+            // 3. Eliminar el producto
+            context.Productos.Remove(producto);
+            context.ProductosImportados.Remove(producto);
+
+            // 4. Guardar cambios finales
+            return context.SaveChanges() > 0;
+        }
+       */
         public ReadOnlyCollection<Producto> ListarProductos()
         {
             List<Producto> lista = new List<Producto>();
@@ -109,9 +151,17 @@ namespace Controladora
             return lista.ToList().AsReadOnly();
         }
 
-        public ReadOnlyCollection<ProductoImportado> ListarProductosImportados()
+        public ReadOnlyCollection<Producto> ListarProductosImportados()
         {
-            return context.ProductosImportados.ToList().AsReadOnly();
+            List<Producto> lista = new List<Producto>();
+            foreach (var item in context.Productos)
+            {
+                if (item is ProductoImportado)
+                {
+                    lista.Add(item);
+                }
+            }
+            return lista.ToList().AsReadOnly();
         }
 
         public ReadOnlyCollection<Categoria> ListarCategorias()

@@ -49,6 +49,19 @@ namespace Modelo
             return false;
         }
 
+        public bool QuitarProducto(Producto nuevoProducto)
+        {
+            var productoRepetido = Productos.FirstOrDefault(p => p.Codigo == nuevoProducto.Codigo);
+
+            if (productoRepetido != null)
+            {
+                Productos.Remove(productoRepetido);
+                return true;
+            }
+
+            return false;
+        }
+
         public string NombreProductos// Para poder ver los grupos en la grilla
         {
             get => Productos != null && Productos.Count > 0 ? string.Join(" ❤️ ", Productos.Select(f => f.Nombre)) : "Sin productos";

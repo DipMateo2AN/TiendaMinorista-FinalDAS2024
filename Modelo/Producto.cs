@@ -51,6 +51,11 @@ namespace Modelo
             return Nombre;
         }
 
+        public void QuitarCategoria()
+        {
+            Categoria = null;
+        }
+
         /////////////////////////////////////////
     }
 }
