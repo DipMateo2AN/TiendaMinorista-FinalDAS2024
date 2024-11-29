@@ -62,7 +62,7 @@ namespace Vista
                 {
                     MessageBox.Show("Fracaso. 😭 ");
                 }
-
+                ActualizarGrillaDetalles(factura);
             }
         }
 
@@ -143,8 +143,12 @@ namespace Vista
 
         private void dgvFacturas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            var factura = (Factura)dgvFacturas.CurrentRow.DataBoundItem;
+            factura = (Factura)dgvFacturas.CurrentRow.DataBoundItem;
             ActualizarDetallesFactura(factura);
+            gBoxDetalle.Enabled = true;
+
+            txtNumero.Text = factura.Numero.ToString();
+
         }
     }
 }
