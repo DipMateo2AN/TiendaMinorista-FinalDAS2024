@@ -1,4 +1,5 @@
-﻿using Modelo;
+﻿using Microsoft.EntityFrameworkCore;
+using Modelo;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -48,7 +49,11 @@ namespace Controladora
 
         public ReadOnlyCollection<Proveedor> ListarProveedores()
         {
-            return context.Proveedores.ToList().AsReadOnly();
+            return context.Proveedores.Include(x => x.Productos).ToList().AsReadOnly();
+        }
+        public ReadOnlyCollection<Producto> ListarProductos()
+        {
+            return context.Productos.ToList().AsReadOnly();
         }
     }
 }

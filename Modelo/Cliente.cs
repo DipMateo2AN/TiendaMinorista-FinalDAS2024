@@ -14,5 +14,9 @@ namespace Modelo
         public string Direccion { get; set; }
         public string Contacto { get; set; }
 
+        public override string ToString()
+        {
+            return Codigo;
+        }
     }
 }

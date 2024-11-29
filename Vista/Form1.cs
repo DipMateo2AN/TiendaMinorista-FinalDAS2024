@@ -30,5 +30,11 @@ namespace Vista
             FormCategorias cat = new FormCategorias();
             cat.ShowDialog();
         }
+
+        private void ventaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormVenta form = new FormVenta();
+            form.ShowDialog();
+        }
     }
 }

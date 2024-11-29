@@ -53,6 +53,7 @@ namespace Modelo
         {
             get => Productos != null && Productos.Count > 0 ? string.Join(" ❤️ ", Productos.Select(f => f.Nombre)) : "Sin productos";
         }
+
         public override string ToString()
         {
             return Nombre;

@@ -42,13 +42,15 @@
             txtNombre = new TextBox();
             label1 = new Label();
             txtCodigo = new TextBox();
+            chBoxListProductos = new CheckedListBox();
+            label5 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvDatos).BeginInit();
             gBoxCliente.SuspendLayout();
             SuspendLayout();
             // 
             // btnSalir
             // 
-            btnSalir.Location = new Point(575, 251);
+            btnSalir.Location = new Point(575, 350);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(149, 23);
             btnSalir.TabIndex = 14;
@@ -59,14 +61,16 @@
             // dgvDatos
             // 
             dgvDatos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvDatos.Location = new Point(270, 24);
+            dgvDatos.Location = new Point(270, 33);
             dgvDatos.Name = "dgvDatos";
-            dgvDatos.Size = new Size(454, 218);
+            dgvDatos.Size = new Size(454, 280);
             dgvDatos.TabIndex = 13;
             dgvDatos.CellClick += dgvDatos_CellClick;
             // 
             // gBoxCliente
             // 
+            gBoxCliente.Controls.Add(label5);
+            gBoxCliente.Controls.Add(chBoxListProductos);
             gBoxCliente.Controls.Add(btnEliminar);
             gBoxCliente.Controls.Add(btnModificar);
             gBoxCliente.Controls.Add(btnAgregar);
@@ -80,14 +84,14 @@
             gBoxCliente.Controls.Add(txtCodigo);
             gBoxCliente.Location = new Point(21, 24);
             gBoxCliente.Name = "gBoxCliente";
-            gBoxCliente.Size = new Size(217, 250);
+            gBoxCliente.Size = new Size(217, 349);
             gBoxCliente.TabIndex = 12;
             gBoxCliente.TabStop = false;
             gBoxCliente.Text = "Datos:";
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(37, 211);
+            btnEliminar.Location = new Point(37, 306);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(149, 23);
             btnEliminar.TabIndex = 10;
@@ -97,7 +101,7 @@
             // 
             // btnModificar
             // 
-            btnModificar.Location = new Point(37, 185);
+            btnModificar.Location = new Point(37, 280);
             btnModificar.Name = "btnModificar";
             btnModificar.Size = new Size(149, 23);
             btnModificar.TabIndex = 9;
@@ -107,7 +111,7 @@
             // 
             // btnAgregar
             // 
-            btnAgregar.Location = new Point(37, 156);
+            btnAgregar.Location = new Point(37, 251);
             btnAgregar.Name = "btnAgregar";
             btnAgregar.Size = new Size(149, 23);
             btnAgregar.TabIndex = 8;
@@ -179,11 +183,28 @@
             txtCodigo.Size = new Size(100, 23);
             txtCodigo.TabIndex = 0;
             // 
+            // chBoxListProductos
+            // 
+            chBoxListProductos.FormattingEnabled = true;
+            chBoxListProductos.Location = new Point(98, 151);
+            chBoxListProductos.Name = "chBoxListProductos";
+            chBoxListProductos.Size = new Size(100, 94);
+            chBoxListProductos.TabIndex = 11;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(17, 151);
+            label5.Name = "label5";
+            label5.Size = new Size(64, 15);
+            label5.TabIndex = 12;
+            label5.Text = "Productos:";
+            // 
             // FormProveedores
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(763, 309);
+            ClientSize = new Size(763, 413);
             Controls.Add(btnSalir);
             Controls.Add(dgvDatos);
             Controls.Add(gBoxCliente);
@@ -211,5 +232,7 @@
         private TextBox txtNombre;
         private Label label1;
         private TextBox txtCodigo;
+        private Label label5;
+        private CheckedListBox chBoxListProductos;
     }
 }

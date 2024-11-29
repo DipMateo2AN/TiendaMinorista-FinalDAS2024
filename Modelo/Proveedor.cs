@@ -11,12 +11,12 @@ namespace Modelo
         public int Id { get; set; }
         public string Codigo { get; set; }
         public string Nombre { get; set; }
-        public string Direccion {  get; set; }
+        public string Direccion { get; set; }
         public string Contacto { get; set; }
 
         public List<Producto> Productos;
 
-        public Proveedor() 
+        public Proveedor()
         {
             Productos = new List<Producto>();
         }
@@ -45,6 +45,11 @@ namespace Modelo
                 return true;
             }
             return false;
+        }
+
+        public string NombreProductos// Para poder ver los grupos en la grilla
+        {
+            get => Productos != null && Productos.Count > 0 ? string.Join(" ❤️ ", Productos.Select(f => f.Nombre)) : "Sin productos";
         }
     }
 }

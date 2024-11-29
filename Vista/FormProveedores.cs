@@ -20,6 +20,7 @@ namespace Vista
             InitializeComponent();
             controladora = new ControladoraProveedores();
             ActualizarGrilla();
+            ActualizarCheckBoxList();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -31,6 +32,11 @@ namespace Vista
                 proveedor.Direccion = txtDireccion.Text;
                 proveedor.Contacto = txtContacto.Text;
                 proveedor.Nombre = txtNombre.Text;
+
+                foreach (var i in chBoxListProductos.CheckedItems)
+                {
+                    proveedor.AgregarProducto((Producto)i);
+                }
 
                 if (controladora.CrearProveedor(proveedor))
                 {
@@ -138,6 +144,12 @@ namespace Vista
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void ActualizarCheckBoxList()
+        {
+            chBoxListProductos.DataSource = null;
+            chBoxListProductos.DataSource = controladora.ListarProductos();
         }
     }
 }

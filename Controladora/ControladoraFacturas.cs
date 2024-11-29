@@ -11,15 +11,36 @@ namespace Controladora
     {
         private Context context = new Context();
 
-        public void CrearFactura(Factura factura)
+        public bool CrearFactura(Factura factura)
         {
-            factura.Numero = context.Facturas.Count() + 1; //Asigno el numero de la factura segun la cantidad de facturas que existan
-            foreach (DetalleFactura d in factura.DetallesFactura) //Recorro los detalles de la factura
+            var facturaDuplicada = context.Facturas.FirstOrDefault(x=>x.Numero == factura.Numero);
+            if (facturaDuplicada == null)
             {
-                factura.Total += d.Subtotal; //Acumulo los subtotales de los detalles en el total de la factura
+                factura.Numero = context.Facturas.Count() + 1; //Asigno el numero de la factura segun la cantidad de facturas que existan
+                foreach (DetalleFactura d in factura.DetallesFactura) //Recorro los detalles de la factura
+                {
+                    factura.Total += d.Subtotal; //Acumulo los subtotales de los detalles en el total de la factura
+                }
+                context.Facturas.Add(factura);
+                context.SaveChanges();
+                return true;
             }
-            context.Facturas.Add(factura);
-            context.SaveChanges();
+            return false;
         }
+
+        public List<Cliente> ListarClientes() 
+        {
+            return context.Clientes.ToList();
+        }
+        public List<Producto> ListarProductos()
+        {
+            return context.Productos.ToList();
+        }
+        public List<Factura> ListarFacturas()
+        {
+            return context.Facturas.ToList();
+        }
+
+
     }
 }

@@ -17,12 +17,18 @@ namespace Controladora
             if (buscarProducto.Stock > detalle.Cantidad) //Si el stock del producto es mayor a la cantidad requerida se puede crear el detalle
             {
                 detalle.Subtotal = buscarProducto.Precio * detalle.Cantidad; //Calculamos el subtotal del detalle
+                context.DetalleFacturas.Add(detalle);
+                context.SaveChanges();
                 return detalle; //retornamos el detalle completo con su subtotal
             }
             else
             {
                 return null;
             }
+        }
+        public List<DetalleFactura> ListarDetallesFacturas()
+        {
+            return context.DetalleFacturas.ToList();
         }
     }
 }
