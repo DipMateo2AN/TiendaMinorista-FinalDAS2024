@@ -15,6 +15,7 @@ namespace Vista
             controladoraDetalle = new ControladoraDetallesDeFactura();
             ActualizarCmbClientes();
             ActualizarCmbProducto();
+            ActualizarGrillaFacturas();
         }
 
         private void btnAbrir_Click(object sender, EventArgs e)
@@ -54,7 +55,7 @@ namespace Vista
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-             
+
             if (ValidarCamposDetalle())
             {
                 DetalleFactura detalle = new DetalleFactura();
@@ -138,7 +139,12 @@ namespace Vista
             dgvDetallesFactura.DataSource = null;
             dgvDetallesFactura.DataSource = controladoraDetalle.ListarDetallesFacturas();
         }
-
+        private void ActualizarDetallesFactura(Factura factura)
+        {
+            //factura = (Factura)dgvFacturas.CurrentRow.DataBoundItem;
+            dgvDetallesFactura.DataSource = null;
+            dgvDetallesFactura.DataSource = controladora.ListarDetallesFactura(factura);
+        }
         private void ActualizarCmbClientes()
         {
             cmbCliente.DataSource = null;
@@ -149,6 +155,12 @@ namespace Vista
         {
             cmbProducto.DataSource = null;
             cmbProducto.DataSource = controladora.ListarProductos();
+        }
+
+        private void dgvFacturas_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var factura = (Factura)dgvFacturas.CurrentRow.DataBoundItem;
+            ActualizarDetallesFactura(factura);
         }
     }
 }

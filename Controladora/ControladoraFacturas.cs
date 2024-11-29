@@ -1,4 +1,5 @@
-﻿using Modelo;
+﻿using Microsoft.EntityFrameworkCore;
+using Modelo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,17 @@ namespace Controladora
         {
             return context.Facturas.ToList();
         }
+        public List<DetalleFactura> ListarDetallesFactura(Factura factura)
+        {
+            var facturaEncontrada = context.Facturas
+            .Include(f => f.DetallesFactura)
+            .FirstOrDefault(f => f.Id == factura.Id);
 
+            var detallesFactura = facturaEncontrada?.DetallesFactura.ToList();
+
+            return detallesFactura.ToList();
+
+        }
 
     }
 }

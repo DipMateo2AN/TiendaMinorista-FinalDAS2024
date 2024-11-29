@@ -198,6 +198,7 @@
             dgvFacturas.Name = "dgvFacturas";
             dgvFacturas.Size = new Size(451, 150);
             dgvFacturas.TabIndex = 2;
+            dgvFacturas.CellClick += dgvFacturas_CellClick;
             // 
             // dgvDetallesFactura
             // 
