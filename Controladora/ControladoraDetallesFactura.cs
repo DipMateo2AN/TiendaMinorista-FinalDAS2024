@@ -37,14 +37,36 @@ namespace Controladora
             // Actualizamos los valores del detalle
             detalle.Producto = producto; // Asociamos el producto rastreado por EF
             detalle.Factura = factura;  // Asociamos la factura rastreada por EF
-            detalle.Subtotal = producto.Precio * detalle.Cantidad;
+            
+            var detalleDuplicado = factura.ListarDetallesFacturas().FirstOrDefault(x=>x.Producto.Codigo==producto.Codigo);
+            //var productoDuplicado = context.DetalleFacturas.FirstOrDefault(x => x.Producto.Codigo == producto.Codigo);
+            if (detalleDuplicado != null)
+            {
+                detalle.Id = detalleDuplicado.Id;
+                detalle.Cantidad += detalleDuplicado.Cantidad;
+                detalle.Subtotal += (detalle.Producto.Precio * detalle.Cantidad);
+                factura.ModificarDetalleFactura(detalle);
+
+                
+                context.DetalleFacturas.Remove(detalleDuplicado);
+                context.DetalleFacturas.Add(detalle);
+                
+                //context.SaveChanges();
+            }
+            else
+            {
+                detalle.Subtotal = detalle.Producto.Precio * detalle.Cantidad;
+                factura.AgregarDetalleFactura(detalle);
+                // Agregamos el detalle al contexto
+                context.DetalleFacturas.Add(detalle);
+            }
+            
 
             // Reducimos el stock del producto
-            producto.Stock -= detalle.Cantidad;
+            producto.AjustarStock(detalle.Cantidad);
 
-            factura.AgregarDetalleFactura(detalle);
-            // Agregamos el detalle al contexto
-            context.DetalleFacturas.Add(detalle);
+
+            
             context.Facturas.Update(factura);
 
             // Guardamos los cambios

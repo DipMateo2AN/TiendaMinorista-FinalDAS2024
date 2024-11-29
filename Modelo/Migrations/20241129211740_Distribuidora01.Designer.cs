@@ -12,8 +12,8 @@ using Modelo;
 namespace Modelo.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20241129204454_xd")]
-    partial class xd
+    [Migration("20241129211740_Distribuidora01")]
+    partial class Distribuidora01
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

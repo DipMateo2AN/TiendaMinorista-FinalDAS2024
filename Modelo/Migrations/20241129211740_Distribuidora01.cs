@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Modelo.Migrations
 {
     /// <inheritdoc />
-    public partial class xd : Migration
+    public partial class Distribuidora01 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

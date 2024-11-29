@@ -32,12 +32,14 @@
             return true;
         }
 
-        public bool EliminarDetalleFactura(DetalleFactura nuevoDetalle)
+
+        public bool ModificarDetalleFactura(DetalleFactura nuevoDetalle)
         {
             var detalleRepetido = DetallesFactura.FirstOrDefault(d => d.Producto.Codigo == nuevoDetalle.Producto.Codigo);
             if (detalleRepetido != null)
             {
-                DetallesFactura.Remove(nuevoDetalle);
+                DetallesFactura.Remove(detalleRepetido);
+                DetallesFactura.Add(nuevoDetalle);
             }
             return false;
         }
