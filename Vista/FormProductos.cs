@@ -162,7 +162,7 @@ namespace Vista
             switch (cmbTipo.Text)
             {
                 case "Nacional":
-                    if (dgvProductos.Rows.Count == 1)
+                    if (dgvProductos.Rows.Count > 0)                      
                     {
                         var producto = (Producto)dgvProductos.CurrentRow.DataBoundItem;
 
@@ -178,7 +178,7 @@ namespace Vista
                     }
                     break;
                 case "Importado":
-                    if (dgvProductosImportados.Rows.Count == 1)
+                    if (dgvProductosImportados.Rows.Count > 0)
                     {
                         var producto = (ProductoImportado)dgvProductosImportados.CurrentRow.DataBoundItem;
 

@@ -101,39 +101,6 @@ namespace Controladora
             return context.SaveChanges() > 0;
         }
 
-       /* public bool EliminarProducto(ProductoImportado producto)
-        {
-            // Obtener el ID del producto
-            var productoId = producto.Id;
-
-            // 1. Eliminar manualmente las relaciones en la tabla intermedia CategoriaProducto
-            var relaciones = context.Set<Dictionary<string, object>>("CategoriaProducto")
-                .Where(cp => EF.Property<int>(cp, "ProductoId") == productoId)
-                .ToList();
-
-            if (relaciones.Any())
-            {
-                context.Set<Dictionary<string, object>>("CategoriaProducto").RemoveRange(relaciones);
-                context.SaveChanges();
-            }
-
-            // 2. Verificar que se hayan eliminado todas las relaciones
-            var relacionesRestantes = context.Set<Dictionary<string, object>>("CategoriaProducto")
-                .Any(cp => EF.Property<int>(cp, "ProductoId") == productoId);
-
-            if (relacionesRestantes)
-            {
-                throw new Exception("No se pudieron eliminar todas las relaciones del producto en la tabla intermedia.");
-            }
-
-            // 3. Eliminar el producto
-            context.Productos.Remove(producto);
-            context.ProductosImportados.Remove(producto);
-
-            // 4. Guardar cambios finales
-            return context.SaveChanges() > 0;
-        }
-       */
         public ReadOnlyCollection<Producto> ListarProductos()
         {
             List<Producto> lista = new List<Producto>();
