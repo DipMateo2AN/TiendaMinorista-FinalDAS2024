@@ -34,7 +34,6 @@ namespace Vista
                 if (controladora.CrearFactura(factura))
                 {
                     gBoxDetalle.Enabled = true;
-                    btnCerrar.Enabled = true;
                     MessageBox.Show("Factura creada correctamente.");
                 }
                 else
