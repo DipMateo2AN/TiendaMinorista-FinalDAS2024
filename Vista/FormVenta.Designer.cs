@@ -30,7 +30,6 @@
         {
             gBoxFactura = new GroupBox();
             cmbCliente = new ComboBox();
-            btnCerrar = new Button();
             btnAbrir = new Button();
             label3 = new Label();
             label1 = new Label();
@@ -56,7 +55,6 @@
             // gBoxFactura
             // 
             gBoxFactura.Controls.Add(cmbCliente);
-            gBoxFactura.Controls.Add(btnCerrar);
             gBoxFactura.Controls.Add(btnAbrir);
             gBoxFactura.Controls.Add(label3);
             gBoxFactura.Controls.Add(label1);
@@ -76,22 +74,11 @@
             cmbCliente.Size = new Size(100, 23);
             cmbCliente.TabIndex = 10;
             // 
-            // btnCerrar
-            // 
-            btnCerrar.Enabled = false;
-            btnCerrar.Location = new Point(138, 134);
-            btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(75, 23);
-            btnCerrar.TabIndex = 9;
-            btnCerrar.Text = "Cerrar";
-            btnCerrar.UseVisualStyleBackColor = true;
-            btnCerrar.Click += btnCerrar_Click;
-            // 
             // btnAbrir
             // 
-            btnAbrir.Location = new Point(13, 134);
+            btnAbrir.Location = new Point(57, 134);
             btnAbrir.Name = "btnAbrir";
-            btnAbrir.Size = new Size(75, 23);
+            btnAbrir.Size = new Size(115, 23);
             btnAbrir.TabIndex = 8;
             btnAbrir.Text = "Abrir";
             btnAbrir.UseVisualStyleBackColor = true;
@@ -198,6 +185,7 @@
             dgvFacturas.Name = "dgvFacturas";
             dgvFacturas.Size = new Size(451, 150);
             dgvFacturas.TabIndex = 2;
+            dgvFacturas.CellClick += dgvFacturas_CellClick;
             dgvFacturas.SelectionChanged += dgvFacturas_SelectionChanged;
             // 
             // dgvDetallesFactura
@@ -264,7 +252,6 @@
 
         private GroupBox gBoxFactura;
         private GroupBox gBoxDetalle;
-        private Button btnCerrar;
         private Button btnAbrir;
         private Label label3;
         private Label label1;

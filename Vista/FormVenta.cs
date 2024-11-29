@@ -41,6 +41,7 @@ namespace Vista
                 {
                     MessageBox.Show("Error al crear la factura.");
                 }
+                ActualizarGrillaFacturas();
             }
         }
 
@@ -56,7 +57,6 @@ namespace Vista
                 var detalleCompleto = controladoraDetalle.CrearDetalleFactura(detalle);
                 if (detalleCompleto != null)
                 {
-                    factura.AgregarDetalleFactura(detalleCompleto);
                     ActualizarGrillaDetalles(factura);
                 }
                 else
@@ -105,11 +105,6 @@ namespace Vista
             return true;
         }
 
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
-            ActualizarGrillaFacturas();
-        }
-
         private void ActualizarGrillaFacturas()
         {
             dgvFacturas.DataSource = null;
@@ -139,6 +134,18 @@ namespace Vista
         {
             var facturaSeleccionada = (Factura)dgvFacturas.CurrentRow.DataBoundItem;
             ActualizarGrillaDetalles(facturaSeleccionada);
+        }
+
+        private void ActualizarDetallesFactura(Factura factura)
+        {
+            dgvDetallesFactura.DataSource = null;
+            dgvDetallesFactura.DataSource = controladora.ListarDetallesFactura(factura);
+        }
+
+        private void dgvFacturas_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var factura = (Factura)dgvFacturas.CurrentRow.DataBoundItem;
+            ActualizarDetallesFactura(factura);
         }
     }
 }
