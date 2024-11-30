@@ -16,7 +16,7 @@ namespace Modelo
 
         public override string ToString()
         {
-            return $"{Codigo} - {Nombre}";
+            return Codigo;
         }
     }
 }
