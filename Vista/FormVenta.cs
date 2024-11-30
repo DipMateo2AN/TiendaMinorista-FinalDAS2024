@@ -8,6 +8,7 @@ namespace Vista
         ControladoraFacturas controladora;
         ControladoraDetallesDeFactura controladoraDetalle;
         Factura factura;
+        DetalleFactura detalleFacturaSeleccionada;
         public FormVenta()
         {
             InitializeComponent();
@@ -67,15 +68,16 @@ namespace Vista
                 if (detalleCompleto != null)
                 {
                     MessageBox.Show("Detalle agregado correctamente.");
-                    ActualizarGrillaDetalles(factura); // Asegura que los detalles se actualicen correctamente
-                    ActualizarGrillaFacturas();
+                    //ActualizarGrillaDetalles(factura); // Asegura que los detalles se actualicen correctamente
+                    //ActualizarGrillaFacturas();
                 }
                 else
                 {
                     MessageBox.Show("Error al agregar el detalle.");
                 }
             }
-
+            ActualizarGrillaDetalles(factura); // Asegura que los detalles se actualicen correctamente
+            ActualizarGrillaFacturas();
         }
 
         private bool ValidarCampos()
@@ -173,6 +175,17 @@ namespace Vista
                 txtNumero.Text = factura.Numero.ToString();
             }
 
+        }
+
+        private void dgvDetallesFactura_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            detalleFacturaSeleccionada = controladoraDetalle.ListarTodosLosDetalles().FirstOrDefault(x => x.Id == int.Parse(dgvDetallesFactura.Rows[e.RowIndex].Cells[0].Value.ToString()));
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            controladoraDetalle.EliminarDetalle(detalleFacturaSeleccionada);
+            ActualizarGrillaFacturas();
         }
     }
 }

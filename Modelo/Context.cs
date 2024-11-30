@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Modelo
 {
-    public class Context:DbContext
+    public class Context : DbContext
     {
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Cliente> Clientes { get; set; }

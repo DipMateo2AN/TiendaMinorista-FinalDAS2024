@@ -44,6 +44,11 @@
             return false;
         }
 
+        public void EliminarDetalle(DetalleFactura detalle)
+        {
+            DetallesFactura.Remove(detalle);
+        }
+
         public override string ToString()
         {
             return Numero.ToString();

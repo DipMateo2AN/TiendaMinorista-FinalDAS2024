@@ -80,5 +80,29 @@ namespace Controladora
                 .Include(df => df.Factura)
                 .ToList();
         }
+
+        public List<DetalleFactura> ListarTodosLosDetalles()
+        {
+            return context.DetalleFacturas.ToList();
+        }
+
+        public void EliminarDetalle(DetalleFactura detalle)
+        {
+            var detalleFactura = context.DetalleFacturas.FirstOrDefault(x=>x.Id==detalle.Id);
+            var factura = context.Facturas.FirstOrDefault(x=>x.Numero == detalleFactura.Factura.Numero);
+
+            detalleFactura.Producto = null;
+            detalleFactura.Factura = null;
+            factura.Total -= detalleFactura.Subtotal;
+            factura.EliminarDetalle(detalleFactura);
+
+
+            context.DetalleFacturas.Remove(detalleFactura);
+            context.Facturas.Update(factura);
+
+
+            context.SaveChanges();
+        }
+
     }
 }
