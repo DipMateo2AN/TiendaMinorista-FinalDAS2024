@@ -14,7 +14,7 @@ namespace Controladora
 
         public bool CrearFactura(Factura factura)
         {
-            var facturaDuplicada = context.Facturas.FirstOrDefault(x=>x.Numero == factura.Numero);
+            var facturaDuplicada = context.Facturas.FirstOrDefault(x => x.Numero == factura.Numero);
             if (facturaDuplicada == null)
             {
                 //factura.Numero = context.Facturas.Count() + 1; //Asigno el numero de la factura segun la cantidad de facturas que existan
@@ -29,7 +29,7 @@ namespace Controladora
             return false;
         }
 
-        public List<Cliente> ListarClientes() 
+        public List<Cliente> ListarClientes()
         {
             return context.Clientes.ToList();
         }
@@ -51,9 +51,6 @@ namespace Controladora
             var detallesFactura = facturaEncontrada?.DetallesFactura.ToList();
 
             return detallesFactura.ToList();
-
         }
-
-
     }
 }

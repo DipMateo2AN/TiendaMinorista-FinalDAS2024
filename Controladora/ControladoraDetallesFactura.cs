@@ -1,4 +1,5 @@
-﻿using Modelo;
+﻿using Microsoft.EntityFrameworkCore;
+using Modelo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,10 @@ namespace Controladora
             }
 
             // Asociamos la factura al contexto
-            var factura = context.Facturas.FirstOrDefault(f => f.Id == detalle.Factura.Id);
+            var factura = context.Facturas
+        //.Include(f => f.DetallesFactura) // Carga la lista de detalles de la factura
+        .FirstOrDefault(f => f.Id == detalle.Factura.Id);
+
 
             if (factura == null)
             {
@@ -37,21 +41,15 @@ namespace Controladora
             // Actualizamos los valores del detalle
             detalle.Producto = producto; // Asociamos el producto rastreado por EF
             detalle.Factura = factura;  // Asociamos la factura rastreada por EF
-            
-            var detalleDuplicado = factura.ListarDetallesFacturas().FirstOrDefault(x=>x.Producto.Codigo == producto.Codigo);
-            //var productoDuplicado = context.DetalleFacturas.FirstOrDefault(x => x.Producto.Codigo == producto.Codigo);
-            if (detalleDuplicado != null)
-            {
-                detalle.Id = detalleDuplicado.Id;
-                detalle.Cantidad += detalleDuplicado.Cantidad;
-                detalle.Subtotal += (detalle.Producto.Precio * detalle.Cantidad);
-                factura.ModificarDetalleFactura(detalle);
+            var detalleExistente = factura.DetallesFactura.FirstOrDefault(d => d.Producto.Codigo == producto.Codigo);
 
-                
-                context.DetalleFacturas.Remove(detalleDuplicado);
-                context.DetalleFacturas.Add(detalle);
-                
-                //context.SaveChanges();
+            if (detalleExistente != null)
+            {
+                // Actualizamos el detalle existente
+                detalleExistente.Cantidad += detalle.Cantidad;
+                detalleExistente.Subtotal = detalleExistente.Cantidad * producto.Precio;
+
+                context.DetalleFacturas.Update(detalleExistente); // Aseguramos que EF rastree los cambios
             }
             else
             {
@@ -60,19 +58,27 @@ namespace Controladora
                 // Agregamos el detalle al contexto
                 context.DetalleFacturas.Add(detalle);
             }
-            
 
             // Reducimos el stock del producto
             producto.AjustarStock(detalle.Cantidad);
 
-
-            factura.Total += detalle.Subtotal;
+            factura.Total = factura.DetallesFactura.Sum(d => d.Subtotal);//
             context.Facturas.Update(factura);
 
             // Guardamos los cambios
             context.SaveChanges();
 
             return detalle;
+        }
+
+        public List<DetalleFactura> ListarDetallesFactura(Factura factura)
+        {
+            // Recupera los detalles asociados a la factura desde la base de datos
+            return context.DetalleFacturas
+                .Where(df => df.Factura.Id == factura.Id)
+                .Include(df => df.Producto)
+                .Include(df => df.Factura)
+                .ToList();
         }
     }
 }

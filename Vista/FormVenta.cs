@@ -35,12 +35,12 @@ namespace Vista
                 {
                     gBoxDetalle.Enabled = true;
                     MessageBox.Show("Factura creada correctamente.");
+                    ActualizarGrillaFacturas(); // Actualiza la lista de facturas
                 }
                 else
                 {
                     MessageBox.Show("Error al crear la factura.");
                 }
-                ActualizarGrillaFacturas();
             }
         }
 
@@ -48,24 +48,34 @@ namespace Vista
         {
             if (ValidarCamposDetalle())
             {
-                DetalleFactura detalle = new DetalleFactura();
-                detalle.Cantidad = int.Parse(txtCantidad.Text);
-                detalle.Producto = controladora.ListarProductos().FirstOrDefault(x => x.Nombre == cmbProducto.Text);
-                detalle.PrecioUnitario = detalle.Producto.Precio;
-                detalle.Factura = factura;
+                var producto = controladora.ListarProductos().FirstOrDefault(x => x.Nombre == cmbProducto.Text);
+                if (producto == null)
+                {
+                    MessageBox.Show("El producto seleccionado no es vÃ¡lido.");
+                    return;
+                }
+
+                DetalleFactura detalle = new DetalleFactura
+                {
+                    Cantidad = int.Parse(txtCantidad.Text),
+                    Producto = producto,
+                    PrecioUnitario = producto.Precio,
+                    Factura = factura
+                };
+
                 var detalleCompleto = controladoraDetalle.CrearDetalleFactura(detalle);
                 if (detalleCompleto != null)
                 {
-                    ActualizarGrillaDetalles(factura);
+                    MessageBox.Show("Detalle agregado correctamente.");
+                    ActualizarGrillaDetalles(factura); // Asegura que los detalles se actualicen correctamente
+                    ActualizarGrillaFacturas();
                 }
                 else
                 {
-                    MessageBox.Show("Fracaso. 😭 ");
+                    MessageBox.Show("Error al agregar el detalle.");
                 }
-                ActualizarGrillaDetalles(factura);
-
             }
-            
+
         }
 
         private bool ValidarCampos()
@@ -114,9 +124,15 @@ namespace Vista
 
         private void ActualizarGrillaDetalles(Factura factura)
         {
-            var fSeleccionada = controladora.ListarFacturas().FirstOrDefault(f => f.Numero == factura.Numero);
+            if (factura == null)
+            {
+                dgvDetallesFactura.DataSource = null;
+                return;
+            }
+
+            var detalles = controladoraDetalle.ListarDetallesFactura(factura);
             dgvDetallesFactura.DataSource = null;
-            dgvDetallesFactura.DataSource = fSeleccionada.ListarDetallesFacturas().AsReadOnly();
+            dgvDetallesFactura.DataSource = detalles;
         }
 
         private void ActualizarCmbClientes()
@@ -145,11 +161,17 @@ namespace Vista
 
         private void dgvFacturas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            factura = (Factura)dgvFacturas.CurrentRow.DataBoundItem;
-            ActualizarDetallesFactura(factura);
+            //factura = (Factura)dgvFacturas.CurrentRow.DataBoundItem;
+            //ActualizarDetallesFactura(factura);
             gBoxDetalle.Enabled = true;
 
-            txtNumero.Text = factura.Numero.ToString();
+
+            if (dgvFacturas.CurrentRow?.DataBoundItem is Factura facturaSeleccionada)
+            {
+                factura = facturaSeleccionada;
+                ActualizarGrillaDetalles(factura);
+                txtNumero.Text = factura.Numero.ToString();
+            }
 
         }
     }
