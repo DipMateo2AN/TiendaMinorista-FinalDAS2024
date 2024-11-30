@@ -30,14 +30,14 @@
         {
             gBoxFactura = new GroupBox();
             cmbCliente = new ComboBox();
-            btnAbrir = new Button();
+            btnRegistrarFactura = new Button();
             label3 = new Label();
             label1 = new Label();
             txtNumero = new TextBox();
             gBoxDetalle = new GroupBox();
             txtCantidad = new TextBox();
             btnEliminar = new Button();
-            btnAgregar = new Button();
+            btnAgregarDetalle = new Button();
             label5 = new Label();
             label4 = new Label();
             cmbProducto = new ComboBox();
@@ -55,7 +55,7 @@
             // gBoxFactura
             // 
             gBoxFactura.Controls.Add(cmbCliente);
-            gBoxFactura.Controls.Add(btnAbrir);
+            gBoxFactura.Controls.Add(btnRegistrarFactura);
             gBoxFactura.Controls.Add(label3);
             gBoxFactura.Controls.Add(label1);
             gBoxFactura.Controls.Add(txtNumero);
@@ -77,16 +77,16 @@
             cmbCliente.Size = new Size(114, 28);
             cmbCliente.TabIndex = 10;
             // 
-            // btnAbrir
+            // btnRegistrarFactura
             // 
-            btnAbrir.Location = new Point(65, 179);
-            btnAbrir.Margin = new Padding(3, 4, 3, 4);
-            btnAbrir.Name = "btnAbrir";
-            btnAbrir.Size = new Size(131, 31);
-            btnAbrir.TabIndex = 8;
-            btnAbrir.Text = "Abrir";
-            btnAbrir.UseVisualStyleBackColor = true;
-            btnAbrir.Click += btnAbrir_Click;
+            btnRegistrarFactura.Location = new Point(65, 179);
+            btnRegistrarFactura.Margin = new Padding(3, 4, 3, 4);
+            btnRegistrarFactura.Name = "btnRegistrarFactura";
+            btnRegistrarFactura.Size = new Size(131, 31);
+            btnRegistrarFactura.TabIndex = 8;
+            btnRegistrarFactura.Text = "Registrar";
+            btnRegistrarFactura.UseVisualStyleBackColor = true;
+            btnRegistrarFactura.Click += btnRegistrarFactura_Click;
             // 
             // label3
             // 
@@ -118,7 +118,7 @@
             // 
             gBoxDetalle.Controls.Add(txtCantidad);
             gBoxDetalle.Controls.Add(btnEliminar);
-            gBoxDetalle.Controls.Add(btnAgregar);
+            gBoxDetalle.Controls.Add(btnAgregarDetalle);
             gBoxDetalle.Controls.Add(label5);
             gBoxDetalle.Controls.Add(label4);
             gBoxDetalle.Controls.Add(cmbProducto);
@@ -151,16 +151,16 @@
             btnEliminar.UseVisualStyleBackColor = true;
             btnEliminar.Click += btnEliminar_Click;
             // 
-            // btnAgregar
+            // btnAgregarDetalle
             // 
-            btnAgregar.Location = new Point(15, 163);
-            btnAgregar.Margin = new Padding(3, 4, 3, 4);
-            btnAgregar.Name = "btnAgregar";
-            btnAgregar.Size = new Size(86, 31);
-            btnAgregar.TabIndex = 11;
-            btnAgregar.Text = "Agregar";
-            btnAgregar.UseVisualStyleBackColor = true;
-            btnAgregar.Click += btnAgregar_Click;
+            btnAgregarDetalle.Location = new Point(15, 163);
+            btnAgregarDetalle.Margin = new Padding(3, 4, 3, 4);
+            btnAgregarDetalle.Name = "btnAgregarDetalle";
+            btnAgregarDetalle.Size = new Size(86, 31);
+            btnAgregarDetalle.TabIndex = 11;
+            btnAgregarDetalle.Text = "Agregar";
+            btnAgregarDetalle.UseVisualStyleBackColor = true;
+            btnAgregarDetalle.Click += btnAgregarDetalle_Click;
             // 
             // label5
             // 
@@ -270,7 +270,7 @@
 
         private GroupBox gBoxFactura;
         private GroupBox gBoxDetalle;
-        private Button btnAbrir;
+        private Button btnRegistrarFactura;
         private Label label3;
         private Label label1;
         private TextBox txtNumero;
@@ -281,7 +281,7 @@
         private Label label6;
         private Label label5;
         private Label label4;
-        private Button btnAgregar;
+        private Button btnAgregarDetalle;
         private Button btnEliminar;
         private DataGridView dgvFacturas;
         private DataGridView dgvDetallesFactura;

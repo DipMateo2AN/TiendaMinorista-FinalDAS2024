@@ -19,9 +19,8 @@ namespace Vista
             ActualizarGrillaFacturas();
         }
 
-        private void btnAbrir_Click(object sender, EventArgs e)
+        private void btnRegistrarFactura_Click(object sender, EventArgs e)
         {
-
             if (ValidarCampos())
             {
                 factura = new Factura
@@ -45,7 +44,7 @@ namespace Vista
             }
         }
 
-        private void btnAgregar_Click(object sender, EventArgs e)
+        private void btnAgregarDetalle_Click(object sender, EventArgs e)
         {
             if (ValidarCamposDetalle())
             {
@@ -79,6 +78,8 @@ namespace Vista
             ActualizarGrillaDetalles(factura); // Asegura que los detalles se actualicen correctamente
             ActualizarGrillaFacturas();
         }
+
+
 
         private bool ValidarCampos()
         {
@@ -187,5 +188,7 @@ namespace Vista
             controladoraDetalle.EliminarDetalle(detalleFacturaSeleccionada);
             ActualizarGrillaFacturas();
         }
+
+
     }
 }

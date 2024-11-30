@@ -41,7 +41,7 @@ namespace Controladora
             // Actualizamos los valores del detalle
             detalle.Producto = producto; // Asociamos el producto rastreado por EF
             detalle.Factura = factura;  // Asociamos la factura rastreada por EF
-            var detalleExistente = factura.DetallesFactura.FirstOrDefault(d => d.Producto.Codigo == producto.Codigo);
+            var detalleExistente = factura.DetallesFactura.FirstOrDefault(d => d.Producto.Nombre == producto.Nombre);
 
             if (detalleExistente != null)
             {
@@ -61,6 +61,7 @@ namespace Controladora
 
             // Reducimos el stock del producto
             producto.AjustarStock(detalle.Cantidad);
+            context.Productos.Update(producto);
 
             factura.Total = factura.DetallesFactura.Sum(d => d.Subtotal);//
             context.Facturas.Update(factura);
@@ -89,16 +90,13 @@ namespace Controladora
         public void EliminarDetalle(DetalleFactura detalle)
         {
             var detalleFactura = context.DetalleFacturas.FirstOrDefault(x=>x.Id==detalle.Id);
-            var factura = context.Facturas.FirstOrDefault(x=>x.Numero == detalleFactura.Factura.Numero);
 
-            detalleFactura.Producto = null;
-            detalleFactura.Factura = null;
-            factura.Total -= detalleFactura.Subtotal;
-            factura.EliminarDetalle(detalleFactura);
-
+           
+            detalleFactura.Factura.Total -= detalleFactura.Subtotal;
+            detalleFactura.Factura.EliminarDetalle(detalleFactura);
 
             context.DetalleFacturas.Remove(detalleFactura);
-            context.Facturas.Update(factura);
+            context.Facturas.Update(detalleFactura.Factura);
 
 
             context.SaveChanges();
