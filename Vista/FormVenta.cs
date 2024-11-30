@@ -63,7 +63,9 @@ namespace Vista
                     MessageBox.Show("Fracaso. 😭 ");
                 }
                 ActualizarGrillaDetalles(factura);
+
             }
+            
         }
 
         private bool ValidarCampos()

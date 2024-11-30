@@ -38,7 +38,7 @@ namespace Controladora
             detalle.Producto = producto; // Asociamos el producto rastreado por EF
             detalle.Factura = factura;  // Asociamos la factura rastreada por EF
             
-            var detalleDuplicado = factura.ListarDetallesFacturas().FirstOrDefault(x=>x.Producto.Codigo==producto.Codigo);
+            var detalleDuplicado = factura.ListarDetallesFacturas().FirstOrDefault(x=>x.Producto.Codigo == producto.Codigo);
             //var productoDuplicado = context.DetalleFacturas.FirstOrDefault(x => x.Producto.Codigo == producto.Codigo);
             if (detalleDuplicado != null)
             {
@@ -66,7 +66,7 @@ namespace Controladora
             producto.AjustarStock(detalle.Cantidad);
 
 
-            
+            factura.Total += detalle.Subtotal;
             context.Facturas.Update(factura);
 
             // Guardamos los cambios

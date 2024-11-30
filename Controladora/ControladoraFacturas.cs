@@ -18,10 +18,10 @@ namespace Controladora
             if (facturaDuplicada == null)
             {
                 //factura.Numero = context.Facturas.Count() + 1; //Asigno el numero de la factura segun la cantidad de facturas que existan
-                foreach (DetalleFactura d in factura.DetallesFactura) //Recorro los detalles de la factura
-                {
-                    factura.Total += d.Subtotal; //Acumulo los subtotales de los detalles en el total de la factura
-                }
+                //foreach (DetalleFactura d in factura.DetallesFactura) //Recorro los detalles de la factura
+                //{
+                //    factura.Total += d.Subtotal; //Acumulo los subtotales de los detalles en el total de la factura
+                //}
                 context.Facturas.Add(factura);
                 context.SaveChanges();
                 return true;
