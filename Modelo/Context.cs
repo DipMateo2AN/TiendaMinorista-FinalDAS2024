@@ -34,20 +34,7 @@ namespace Modelo
             model.Entity<ProductoImportado>().ToTable("ProductoImportado").HasBaseType<Producto>();
 
             // Configurar relaciones muchos-a-muchos
-            model.Entity<Categoria>()
-                .HasMany(c => c.Productos)
-                .WithMany()
-                .UsingEntity<Dictionary<string, object>>(
-                    "CategoriaProducto", // Tabla intermedia
-                    j => j.HasOne<Producto>()
-                          .WithMany()
-                          .HasForeignKey("ProductoId")
-                          .OnDelete(DeleteBehavior.Restrict), // Evitar eliminación en cascada
-                    j => j.HasOne<Categoria>()
-                          .WithMany()
-                          .HasForeignKey("CategoriaId")
-                          .OnDelete(DeleteBehavior.Restrict)); // Evitar eliminación en cascada
-
+                
             model.Entity<Proveedor>()
                 .HasMany(p => p.Productos)
                 .WithMany()
@@ -62,19 +49,8 @@ namespace Modelo
                           .HasForeignKey("ProveedorId")
                           .OnDelete(DeleteBehavior.Restrict)); // Evitar eliminación en cascada
 
-            model.Entity<Factura>()
-                .HasMany(f => f.DetallesFactura)
-                .WithMany()
-                .UsingEntity<Dictionary<string, object>>(
-                    "FacturaDetalleFactura", // Tabla intermedia
-                    j => j.HasOne<DetalleFactura>()
-                          .WithMany()
-                          .HasForeignKey("DetalleFacturaId")
-                          .OnDelete(DeleteBehavior.Restrict), // Evitar eliminación en cascada
-                    j => j.HasOne<Factura>()
-                          .WithMany()
-                          .HasForeignKey("FacturaId")
-                          .OnDelete(DeleteBehavior.Restrict)); // Evitar eliminación en cascada
+  
+              
 
             // Configurar relaciones uno-a-muchos o muchos-a-uno
             model.Entity<Factura>()

@@ -17,8 +17,6 @@ namespace Controladora
             var validarProducto = context.Productos.FirstOrDefault(p=>p.Codigo == producto.Codigo);
             if (validarProducto == null)
             {
-                context.Productos.Add(producto);
-                producto.Categoria.AgregarProducto(producto);
                 
                 context.Categorias.Update(producto.Categoria);
                 context.SaveChanges();
@@ -33,7 +31,7 @@ namespace Controladora
             if (validarProducto == null)
             {
                 context.ProductosImportados.Add(producto);
-                cat.AgregarProducto(producto);
+         
                 context.Categorias.Update(cat);
                 context.SaveChanges();
                 return true;
@@ -47,8 +45,7 @@ namespace Controladora
             if (validarProducto != null)
             {
                 context.Productos.Update(productoActualizado);
-                var busqueda = cat.Productos.FirstOrDefault(x => x.Codigo == cat.Codigo);
-                cat.ModificarProducto(busqueda);
+       
                 context.Categorias.Update(cat);
                 return context.SaveChanges() > 0;
             }
@@ -61,9 +58,7 @@ namespace Controladora
             if (validarProducto != null)
             {
                 context.ProductosImportados.Update(productoActualizado);
-                var busqueda = cat.Productos.FirstOrDefault(x => x.Codigo == cat.Codigo);
-                cat.ModificarProducto(busqueda);
-                context.Categorias.Update(cat);
+                   context.Categorias.Update(cat);
                 return context.SaveChanges() > 0;
             }
             return false;
