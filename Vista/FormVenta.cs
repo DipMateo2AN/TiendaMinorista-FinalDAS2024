@@ -61,20 +61,11 @@ namespace Vista
                     Factura = factura
                 };
 
-                //var detalleCompleto = controladoraDetalle.CrearDetalleFactura(detalle);
-                //if (detalleCompleto != null)
-                //{
-                //    MessageBox.Show("Detalle agregado correctamente.");
-                //    //ActualizarGrillaDetalles(factura); // Asegura que los detalles se actualicen correctamente
-                //    //ActualizarGrillaFacturas();
-                //}
-                //else
-                //{
-                //    MessageBox.Show("Error al agregar el detalle.");
-                //}
+                controladora.AgregarDetalle(detalle);
+                MessageBox.Show("Detalle agregado correctamente.");
+                ActualizarGrillaDetalles(factura); // Asegura que los detalles se actualicen correctamente
+                ActualizarGrillaFacturas();
             }
-            ActualizarGrillaDetalles(factura); // Asegura que los detalles se actualicen correctamente
-            ActualizarGrillaFacturas();
         }
 
 
@@ -131,9 +122,9 @@ namespace Vista
                 return;
             }
 
-            //var detalles = controladoraDetalle.ListarDetallesFactura(factura);
-            //dgvDetallesFactura.DataSource = null;
-            //dgvDetallesFactura.DataSource = detalles;
+            var detalles = controladora.ListarDetallesFactura(factura);
+            dgvDetallesFactura.DataSource = null;
+            dgvDetallesFactura.DataSource = detalles;
         }
 
         private void ActualizarCmbClientes()
@@ -162,8 +153,7 @@ namespace Vista
 
         private void dgvFacturas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //factura = (Factura)dgvFacturas.CurrentRow.DataBoundItem;
-            //ActualizarDetallesFactura(factura);
+
             gBoxDetalle.Enabled = true;
 
 
@@ -183,8 +173,8 @@ namespace Vista
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-        //    controladoraDetalle.EliminarDetalle(detalleFacturaSeleccionada);
-        //    ActualizarGrillaFacturas();
+            //    controladoraDetalle.EliminarDetalle(detalleFacturaSeleccionada);
+            //    ActualizarGrillaFacturas();
         }
 
 

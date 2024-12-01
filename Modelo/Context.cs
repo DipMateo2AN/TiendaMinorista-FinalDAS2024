@@ -47,9 +47,7 @@ namespace Modelo
                     j => j.HasOne<Proveedor>()
                           .WithMany()
                           .HasForeignKey("ProveedorId")
-                          .OnDelete(DeleteBehavior.Restrict)); // Evitar eliminación en cascada
-
-  
+                          .OnDelete(DeleteBehavior.Restrict)); // Evitar eliminación en cascada 
               
 
             // Configurar relaciones uno-a-muchos o muchos-a-uno

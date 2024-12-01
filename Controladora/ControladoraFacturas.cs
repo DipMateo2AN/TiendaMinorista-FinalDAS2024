@@ -17,12 +17,21 @@ namespace Controladora
             var facturaDuplicada = context.Facturas.FirstOrDefault(x => x.Numero == factura.Numero);
             if (facturaDuplicada == null)
             {
-                //factura.Numero = context.Facturas.Count() + 1; //Asigno el numero de la factura segun la cantidad de facturas que existan
-                //foreach (DetalleFactura d in factura.DetallesFactura) //Recorro los detalles de la factura
-                //{
-                //    factura.Total += d.Subtotal; //Acumulo los subtotales de los detalles en el total de la factura
-                //}
                 context.Facturas.Add(factura);
+                context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public bool AgregarDetalle(DetalleFactura detalle)
+        {
+            var factura = context.Facturas.FirstOrDefault(x=>x.Numero == detalle.Factura.Numero);
+            if (factura != null)
+            {
+                factura.AgregarDetalleFactura(detalle);
+                context.DetalleFacturas.Add(detalle);
+                context.Facturas.Update(factura);
                 context.SaveChanges();
                 return true;
             }
@@ -44,13 +53,15 @@ namespace Controladora
 
         public List<DetalleFactura> ListarDetallesFactura(Factura factura)
         {
-            var facturaEncontrada = context.Facturas
-            .Include(f => f.DetallesFactura)
-            .FirstOrDefault(f => f.Id == factura.Id);
-
-            var detallesFactura = facturaEncontrada?.DetallesFactura.ToList();
-
-            return detallesFactura.ToList();
+            List<DetalleFactura> detallesFactura= new List<DetalleFactura>();
+            foreach (var d in context.DetalleFacturas)
+            {
+                if(d.Factura.Numero == factura.Numero)
+                {
+                    detallesFactura.Add(d);
+                }
+            }
+            return detallesFactura;
         }
     }
 }
