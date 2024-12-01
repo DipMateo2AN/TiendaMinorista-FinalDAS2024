@@ -40,7 +40,7 @@ namespace Controladora
 
         public List<Categoria> ListarCategorias()
         {
-            return context.Categorias.Include(x=>x.Productos).ToList();
+            return context.Categorias.ToList();
         }
 
         public List<Producto> ListarProductos()
